@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#14130e">
+<title>Chefão de Chinelo</title>
+<style>
+:root{--bg:#14130e;--card:#211f16;--card2:#2d2a1d;--tx:#ece6d2;--mut:#9c957a;--or:#d9a21b;--mg:#a8321f;--az:#8aa65a;--ok:#9cc25a;--bad:#e0583f;--gold:#e6b422}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);overflow-x:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%;width:100%}
+body{overflow-x:clip;overscroll-behavior:none;touch-action:pan-y;min-height:100vh;min-height:100dvh;width:100%;max-width:100vw}
+.c,.row,.gr,.sub,.chips,.top{min-width:0;max-width:100%}.gr{overflow-wrap:anywhere}
+img,svg,table{max-width:100%}
+.evb{position:fixed;left:50%;transform:translateX(-50%);width:min(520px,100%);bottom:calc(68px + env(safe-area-inset-bottom));z-index:8;padding:0 8px;max-height:60vh;overflow:auto}
+.evb .c{box-shadow:0 4px 18px #000b;margin:0}
+body.ev{padding-bottom:260px}
+.hd .mis{min-height:2.7em}
+.fim{overflow:auto;align-items:flex-start}.fim .c{margin:auto;text-align:left}.fim .c h1{text-align:center}
+.fim .rs{display:flex;justify-content:space-between;gap:8px;font-size:14px;padding:3px 0;border-bottom:1px dashed #fff2}
+.fim h3{margin:12px 0 4px;font-size:15px}
+.tro{display:flex;gap:10px;align-items:center}.tro .ic{font-size:30px}.tro.lk{opacity:.45;filter:grayscale(1)}
+.pbar{height:10px;background:#0006;border-radius:6px;overflow:hidden;margin:6px 0}.pbar i{display:block;height:100%;background:var(--gold)}
+.qty{display:flex;align-items:center;gap:8px}.qty b{min-width:20px;text-align:center}.qty button{width:34px;height:34px;border-radius:8px;border:0;background:var(--card2);color:var(--tx);font-size:18px}.qty button:disabled{opacity:.35}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.35 system-ui,-apple-system,sans-serif;padding-bottom:84px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.09;z-index:50;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+body.preso{background:#1d0e0b}
+#app{max-width:520px;margin:0 auto}
+.hd{position:sticky;top:0;z-index:5;background:#1b1912;padding:10px 12px;border-bottom:3px solid var(--mg)}
+body.preso .hd{background:#3a0f0a;border-bottom-color:var(--bad)}
+.top{display:flex;justify-content:space-between;gap:6px;font-weight:700}
+.bar{position:relative;height:22px;background:#0b0a07;border:2px solid #000;border-radius:11px;margin-top:8px;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#8a5a10,var(--or))}
+.bar span{position:relative;display:block;text-align:center;font-size:13px;font-weight:700;line-height:18px}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.chip{background:var(--card2);color:var(--tx);border:2px solid #000;border-radius:14px;padding:3px 9px;font-size:12px;font-weight:700}
+.chip.bad,.chip.hca{background:#6a1f12;color:#ffd0c4}
+.chip.hqu{background:#7a4a10;color:#ffe2b0}
+.chip.hmo{background:#5a5320;color:#f3eaa5}
+.chip.hok{background:#2c3d1a;color:#c8f08a}
+.infob{margin-top:6px;background:#0b0a07;border:2px solid var(--or);border-radius:6px;padding:6px 8px;font-size:13px}
+.mis{margin-top:6px;font-size:13px;color:var(--gold);font-weight:700}
+#body{padding:10px 12px}
+h1,h2,h3{font-family:Impact,'Arial Black','Arial Narrow Bold',sans-serif;letter-spacing:.5px;font-weight:400}
+h1{margin:6px 0;font-size:30px;color:var(--or);text-transform:uppercase}
+h2{margin:4px 0;font-size:26px;color:var(--bad);text-transform:uppercase}
+h3{margin:18px 0 8px;color:var(--az);font-size:18px;text-transform:uppercase}
+.c{background:var(--card);border:2px solid #000;box-shadow:3px 3px 0 #000;border-radius:6px;padding:10px;margin-bottom:10px}
+.c.lock{opacity:.5}
+.c.cur{outline:2px solid var(--or)}
+.c.win{border-color:#5f8a2a}
+.c.lose{border-color:var(--bad)}
+.c.dica{border-color:var(--gold);background:#2a2610}
+.warn{background:#4a1c14;color:#ffd0c4;border-radius:6px;padding:6px 8px}
+.hd .warn{margin-top:6px;font-size:13px}
+.hd .jb{background:var(--bad);color:#1a0500;font-weight:800;font-size:14px;text-align:center}
+.jail{border:3px solid var(--bad);background:#2b0f0a;border-radius:8px;padding:12px;margin-bottom:10px}
+.row{display:flex;gap:10px;align-items:center}
+.ic{font-size:28px;width:38px;text-align:center}
+.gr{flex:1;min-width:0}
+.mu{color:var(--mut);font-size:13px}
+.b{border:2px solid #000;box-shadow:2px 2px 0 #000;border-radius:6px;padding:10px 12px;font-weight:800;font-size:14px;color:#1a1200;background:linear-gradient(180deg,#e8b02a,#b5800f);white-space:nowrap}
+.b.alt{background:linear-gradient(180deg,#a9c47a,#6f8a45)}
+.b.pk{background:linear-gradient(180deg,#d4503a,#8e2616);color:#fff}
+.b:disabled{opacity:.35}
+.b:active{transform:translate(2px,2px);box-shadow:none}
+input{width:100%;padding:10px;border-radius:6px;border:2px solid #000;background:#0b0a07;color:var(--tx);font-size:16px;margin:6px 0}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#1b1912;border-top:3px solid var(--mg);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:9}
+body.preso .nav{border-top-color:var(--bad)}
+.nav button{flex:1;background:none;border:0;color:var(--mut);padding:8px 0;font-size:11px}
+.nav button b{display:block;font-size:22px;font-weight:400}
+.nav button.on{color:var(--or);font-weight:700}
+.stage{display:flex;align-items:flex-end;justify-content:center;gap:10px;padding:14px 10px 8px;border-radius:6px;border:2px solid #000;position:relative;min-height:130px}
+.stage .bd{font-size:78px;line-height:1}
+.stage .it{font-size:44px;line-height:1}
+.stage .cs{position:absolute;right:8px;top:6px;font-size:26px;opacity:.9}
+.stage .tg{position:absolute;left:8px;top:6px;font-size:11px;font-weight:800;background:#000a;color:#fff;border-radius:4px;padding:2px 6px}
+.stage .lb{text-align:center;font-size:11px;color:#fff;opacity:.85}
+.dd{margin:8px 0}
+.mini{font-size:30px;line-height:1;position:relative;margin-right:6px}
+.mini sup{position:absolute;right:-9px;bottom:-3px;font-size:15px}
+.c.ready{border-color:#ffcf3b;box-shadow:3px 3px 0 #ffcf3b88}
+.bdg{position:absolute;top:2px;right:18%;background:#e63b2e;color:#fff;font-size:10px;font-weight:900;border-radius:9px;padding:1px 5px;text-decoration:none}
+.nav button{position:relative}
+.pop{position:fixed;left:50%;top:90px;transform:translateX(-50%);font-weight:900;font-size:24px;color:#ffcf3b;text-shadow:2px 2px 0 #000;animation:pp 1.4s forwards;z-index:99;pointer-events:none}
+@keyframes pp{to{top:30px;opacity:0}}
+.ddh{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--card2);color:var(--tx);border:2px solid #000;box-shadow:3px 3px 0 #000;border-radius:6px;padding:11px 12px;font-weight:800;font-size:14px;text-align:left}
+.ddh.on{background:var(--or);color:#1a1200}
+.ddh i{font-style:normal;font-size:16px}
+.ddb{margin-top:8px}
+.sub{display:flex;gap:6px;margin:8px 0 4px;flex-wrap:wrap}
+.sub button{flex:1;background:var(--card2);color:var(--mut);border:2px solid #000;border-radius:6px;padding:8px 6px;font-weight:700;font-size:12px}
+.sub button.on{background:var(--or);color:#1a1200}
+#toast{position:fixed;left:50%;top:150px;transform:translateX(-50%);background:#000e;border:2px solid var(--or);color:#fff;padding:10px 14px;border-radius:8px;max-width:90%;text-align:center;opacity:0;pointer-events:none;transition:.2s;z-index:60}
+#toast.show{opacity:1}
+.reels{font-size:44px;text-align:center;letter-spacing:8px;margin:6px 0}
+.hand{font-size:20px;font-weight:700;margin:4px 0}
+.fim{position:fixed;inset:0;background:#000d;z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
+.fim .c{max-width:420px;width:100%;background:var(--card2);text-align:center}
+.me{outline:2px solid var(--or)}
+.sp button{margin-right:6px}
+.req{display:inline-block;font-weight:800;font-size:12px;border-radius:4px;padding:2px 6px;margin:3px 0}
+.req.ok{background:#32481a;color:#c8f08a}
+.req.no{background:#5a3a10;color:#ffd9a0}
+.pc{font-weight:800;font-size:15px}
+.val{color:var(--gold);font-weight:800;font-size:17px;margin-right:6px}
+.lose{color:#e8a090;font-size:12px;margin:2px 0}
+.pc.g{color:var(--ok)}.pc.y{color:var(--gold)}.pc.r{color:var(--bad)}
+.big{display:flex;gap:14px;flex-wrap:wrap;font-size:18px;font-weight:800;margin:6px 0}
+.up{color:var(--ok)}.dn{color:var(--bad)}
+.pt{font-size:44px;width:70px;height:70px;line-height:70px;text-align:center;border:3px solid #000;border-radius:8px;background:radial-gradient(circle,#4a4425,#1a1810);flex:none}
+.bon{color:var(--ok);font-size:13px}.def{color:var(--bad);font-size:13px}
+.meter,.heat{height:10px;background:#0b0a07;border:2px solid #000;border-radius:5px;margin-top:6px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--az)}
+.heat i{display:block;height:100%;background:linear-gradient(90deg,var(--or),var(--bad))}
+.tit{text-align:center;padding-top:40px}
+.tit .logo{font-size:96px}
+.flick{animation:fl 5s infinite}
+@keyframes fl{0%,92%,100%{opacity:1}93%{opacity:.4}95%{opacity:1}97%{opacity:.6}}
+.feltro{background:#12301c;border-color:#06140b}
+.carta{display:inline-block;background:#f4efe0;color:#111;border:2px solid #000;border-radius:5px;padding:6px 8px;margin:3px 4px 3px 0;font-weight:800;font-size:18px;min-width:40px;text-align:center}
+.carta.rd{color:#b01919}
+.carta.back{background:repeating-linear-gradient(45deg,#7a1f12,#7a1f12 4px,#a8321f 4px,#a8321f 8px);color:#fff}
+.b.sm{padding:6px 10px;font-size:12px}
+.qk{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 8px}
+.nav button.lk{opacity:.4}
+.cartaz{background:#d8c690;color:#2a1a08;border:3px solid #5a3a14;border-radius:4px;padding:10px;margin-bottom:10px;text-align:center;transform:rotate(-1deg);box-shadow:3px 3px 0 #000}
+.cz-t{font-family:Impact,'Arial Black',sans-serif;font-size:30px;letter-spacing:2px;color:#7a1f12}
+.cz-f{font-size:54px;filter:sepia(.6) contrast(1.1)}
+.cz-n{font-weight:800;text-transform:uppercase;font-size:13px}
+.cz-r{font-family:Impact,'Arial Black',sans-serif;font-size:22px;margin:4px 0}
+.cz-s{font-size:13px;font-weight:700}
+body.baile{background:#120824}
+body.baile .hd{background:#1d0b3a;border-bottom-color:#d63bd0}
+body.baile .nav{border-top-color:#d63bd0}
+.c.neon{border-color:#d63bd0;animation:neon 2.4s infinite alternate}
+@keyframes neon{from{box-shadow:0 0 6px #d63bd055,3px 3px 0 #000}to{box-shadow:0 0 18px #3bd6f0aa,3px 3px 0 #000}}
+body.cacado .hd{animation:pulso 1.6s infinite}
+@keyframes pulso{0%,100%{box-shadow:none}50%{box-shadow:inset 0 0 22px #e0583f}}
+.mesa{background:#0d2414;border:2px solid #000;border-radius:6px;padding:8px;margin:6px 0;color:#cfe8c0;font-size:13px}
+.mesa span{float:right;font-weight:700}
+.mesa.on{border-color:#ffcf3b}
+.mesa.lk{opacity:.5}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast"></div>
+<script>
+const DAY=864e5,HOUR=36e5,ROUND=7*DAY;
+const fmt=n=>'R$ '+Math.round(n).toLocaleString('pt-BR');
+const num=n=>Math.round(n).toLocaleString('pt-BR');
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const ri=(a,b)=>Math.floor(rnd(a,b+1));
+const pick=a=>a[ri(0,a.length-1)];
+const $=id=>document.getElementById(id);
+
+const PROF={
+ malandro:{n:'Malandro',e:'😎',b:'Sem bônus.',d:'Sem defeito. Bom para aprender o jogo.'},
+ golpista:{n:'Golpista',e:'🕵️',b:'+15 pontos de chance em todos os roubos. Começa forte em inteligência (8) e lábia (6), fraco em força (4).',d:'A renda passiva rende 30% menos.'},
+ bruta:{n:'Brutamontes',e:'🦍',b:'Começa com força e tolerância 10, mas fraco em inteligência e lábia (4). Perde metade no ataque do baile.',d:'Perde o dobro de itens ao recolher a renda passiva.'},
+ bicheiro:{n:'Bicheiro',e:'🎩',b:'10 vagas de renda passiva e metade do risco ao recolher. Um pouco acima em inteligência e lábia (6).',d:'−10 pontos de chance nos roubos.'},
+ empresario:{n:'Empresário',e:'🤵',b:'2 empresas e +30% de produção. Começa forte em lábia (8) e inteligência (7), fraco em força (4).',d:'Perde mais dinheiro quando atacado no baile.'}
+};
+const A0={malandro:{f:5,i:5,c:5,t:5},golpista:{f:4,i:8,c:6,t:5},bruta:{f:10,i:4,c:4,t:10},bicheiro:{f:5,i:6,c:6,t:5},empresario:{f:4,i:7,c:8,t:4}};
+// tp: v = violento (força), e = golpe esperto (inteligência), s = lábia (carisma); lv = respeito para liberar
+const ROUBOS=[
+{n:'Trombada na feira',e:'🥬',st:3,pw:16,lv:0,g:[26,46],rp:1,tp:'v',pena:5,ok:'A tia da banana nem viu. Ficou o cheiro de coentro na mão.',ko:'O feirante te pegou pela gola. A tia da banana apontou o dedo.'},
+{n:'Bolsa de velhinha',e:'👵',st:4,pw:22,lv:0,g:[35,80],rp:1,tp:'v',pena:6,ok:'Ela gritou, você correu. A bolsa tinha bala de coco e uns trocados.',ko:'A velhinha tinha guarda-chuva e boa pontaria.'},
+{n:'Bilhete premiado',e:'🎫',st:6,pw:30,lv:0,g:[70,130],rp:2,tp:'s',pena:8,ok:'O trouxa acreditou no bilhete. Trouxa sempre acredita.',ko:'O trouxa era fiscal da loteria.'},
+{n:'Furtar bicicleta',e:'🚲',st:7,pw:38,lv:0,g:[100,220],rp:2,tp:'e',pena:8,ok:'O cadeado era de enfeite. A bicicleta, agora, é sua.',ko:'O dono estava olhando da janela, com o telefone na mão.'},
+{n:'Arrombar casa',e:'🏚️',st:10,pw:58,lv:0,g:[200,450],rp:3,tp:'e',pena:12,ok:'Casa vazia, geladeira cheia, TV de 32 polegadas.',ko:'O cachorro da casa não latiu. Ele só ficou te olhando até a viatura chegar.'},
+{n:'Loja de conveniência',e:'🏪',st:14,pw:70,lv:0,g:[400,850],rp:4,tp:'v',pena:15,ok:'O caixa levantou as mãos antes de você pedir.',ko:'A câmera pegou tudo, até o susto que você levou.'},
+{n:'Roubar carro',e:'🚗',st:20,pw:110,lv:0,g:[800,1800],rp:6,tp:'e',pena:18,ok:'Ligação direta em 40 segundos. Rádio ainda tocando pagode.',ko:'O alarme tocou. O dono tinha um segundo carro, parado atrás de você.'},
+{n:'Golpe do Pix',e:'📱',st:26,pw:160,lv:25,g:[1500,3200],rp:8,tp:'s',pena:20,ok:'O comprovante era falso, mas a pessoa acreditou do mesmo jeito.',ko:'A vítima era delegada e estava só testando.'},
+{n:'Caixa eletrônico',e:'🏧',st:38,pw:280,lv:50,g:[3500,7500],rp:12,tp:'e',pena:25,ok:'A máquina cuspiu notas por uns dois minutos, bem devagar.',ko:'O alarme silencioso não era tão silencioso.'},
+{n:'Carga na rodovia',e:'🚚',st:50,pw:500,lv:90,g:[8000,18000],rp:20,tp:'v',pena:40,ok:'A carga era de eletrodomésticos. O motorista só pediu para você levar a geladeira também.',ko:'O motorista era parente de policial. Aqui todo mundo é.'},
+{n:'Golpe do consórcio',e:'📄',st:55,pw:750,lv:140,g:[15000,32000],rp:26,tp:'s',pena:35,ok:'Contrato de 14 páginas, ninguém leu. Só você ganhou.',ko:'Um dos clientes resolveu ler o contrato.'},
+{n:'Joalheria de shopping',e:'💎',st:60,pw:1100,lv:210,g:[30000,65000],rp:35,tp:'e',pena:50,ok:'Vitrine limpa. O segurança dormia em pé.',ko:'O segurança estava acordado. Era a primeira vez em anos.'},
+{n:'Cofre de banco',e:'🏦',st:70,pw:2000,lv:310,g:[120000,280000],rp:60,tp:'e',pena:90,ok:'Você ouviu o cofre abrir. Pareceu um suspiro.',ko:'O cofre abriu, mas o gerente também chamou a polícia.'},
+{n:'Carro-forte',e:'🚛',st:75,pw:2800,lv:450,g:[220000,480000],rp:80,tp:'v',pena:120,ok:'Sacos de dinheiro caindo na rua. Ninguém ousou olhar.',ko:'O carro-forte tinha mais gente dentro do que o previsto.'},
+{n:'Cassino clandestino',e:'🎲',st:80,pw:4000,lv:650,g:[400000,800000],rp:100,tp:'v',pena:150,ok:'O gerente entregou as fichas com um sorriso torto.',ko:'As fichas eram marcadas. O dono também.'},
+{n:'Desvio da prefeitura',e:'🏛️',st:85,pw:6000,lv:900,g:[900000,1800000],rp:130,tp:'s',pena:180,ok:'Uma licitação, uma ata, uma empresa fantasma. Tudo legal no papel.',ko:'Alguém lembrou de pedir nota fiscal.'},
+{n:'Tesouro do Banco Central',e:'💰',st:90,pw:9000,lv:1300,g:[2000000,4000000],rp:180,tp:'e',pena:240,ok:'Barras de ouro dentro de uma caixa de sapato. Ninguém perguntou.',ko:'O cofre tinha um segundo cofre dentro, e uma câmera dentro desse.'}
+];
+ROUBOS.forEach(r=>{r.g=[Math.round(r.g[0]*1.4),Math.round(r.g[1]*1.4)]});
+const FXR=[0,0,0,0,0,1,1,1,2,2,2,2,3,3,3,3,4];
+ROUBOS.forEach((r,i)=>{r.fx=FXR[i]});
+const TN={v:'💪 Violento',e:'🧠 Golpe esperto',s:'😏 Lábia'};
+const W={v:{f:4,i:0,c:0,t:0},e:{f:0,i:4,c:0,t:0},s:{f:0,i:0,c:4,t:0}};
+const FOOD=[['Cafezinho','☕',3,3],['Pastel com caldo de cana','🥟',15,8],['PF','🍛',30,15]];
+// nome, emoji, preço, estamina, ressaca
+const BEB=[['Cerveja','🍺',10,10,4],['Cachaça','🥃',30,25,8],['Energético','⚡',80,30,3],['Catuaba','🍷',300,50,2]];
+const CASAS=[['Praça','🌳',0,1],['Pensão','🛏️',2000,1.25],['Kitnet','🏠',15000,1.5],['Apartamento','🏢',80000,2],['Mansão','🏰',500000,3]];
+const FAIXAS=['Dia a dia','Brancas','Fogo e blefe','Pesadas','Lendárias'];
+// nome, emoji, preço, poder violento, poder de blefe, faixa
+const ARMAS=[
+['Soco','👊',0,2,0,0],['Dedo no bolso','👉',20,0,8,0],['Chinelo','🩴',60,6,2,0],['Pedaço de pau','🪵',150,14,3,0],['Frigideira de ferro','🍳',300,24,5,0],['Garrafa quebrada','🍾',500,34,10,0],
+['Soco inglês','🥊',800,50,6,1],['Faca de rocambole','🗡️',1400,66,12,1],['Faca de cozinha','🔪',2200,88,18,1],['Facão','🗡️',3500,120,24,1],['Machado','🪓',5000,155,22,1],
+['Arma de brinquedo','🔫',1800,6,90,2],['Pistola de airsoft','🔫',4000,60,130,2],['Espingarda de chumbinho','🔫',7000,150,110,2],['Trezoitão','🔫',12000,260,150,2],['Pistola 9mm','🔫',28000,400,220,2],['Escopeta calibre 12','💥',60000,620,320,2],
+['Fuzil de assalto','🔫',150000,750,350,3],['Metralhadora','🔫',280000,1050,450,3],['Sniper','🎯',450000,1400,700,3],['Minigun','🌀',700000,1900,650,3],['Bazuca','🚀',1100000,2600,800,3],
+['Motosserra','🪚',1600000,3200,1600,4],['Laser dourado','✨',2500000,4500,2200,4],['Chinelo Dourado da Mamãe','🥇',5000000,6000,3000,4],
+['Rolo de macarrão da vovó','🥖',900,44,14,0],['Espada de samurai de camelô','⚔️',8000,170,28,1],['Revólver do vovô','🔫',90000,690,370,2],['Lança-chamas de churrasco','🔥',1500000,2750,860,3]
+];
+const PROT=[['Camisa de time','👕',0,2],['Jaqueta jeans','🧥',300,10],['Capacete de moto','⛑️',1500,30],['Colete de segurança','🦺',10000,100],['Colete à prova de bala','🛡️',50000,300],['Fantasia de destaque','🪶',300000,900]];
+const RENDA=[['Boneca inflável','🎈',100,40,0],['Flanelinha','🧍',1000,300,.05],['Fiado do bar','📒',4000,900,.08],['Camelô','📦',8000,2000,.05],['Cambista de ingresso','🎟️',20000,5200,.04],['Lan house','🕹️',35000,8000,.02],['Banca do bicho','🎰',60000,12000,.03],['Rifa clandestina','🎲',150000,32000,.06],['Carro de som','🔊',400000,85000,.04]];
+const EMP=[['Lava-jato','🚿',30000,1000,9000],['Fliperama','👾',80000,2500,18000],['Desmanche','🔧',150000,5000,45000],['Ferro-velho','🔩',500000,14000,130000]];
+const ATR=[['f','Força','💪','Sobe com roubos violentos e briga. Dá poder nos roubos violentos.'],['i','Inteligência','🧠','Sobe com golpes espertos. Dá poder nos golpes.'],['c','Carisma','😏','Sobe com lábia e paquera. Dá poder na lábia, ajuda na paquera e no suborno.'],['t','Tolerância','🍺','Sobe bebendo. Menos ressaca, mais estamina máxima e menos perda nos ataques.']];
+const ATK={f:'💪 Força',i:'🧠 Inteligência',c:'😏 Carisma',t:'🍺 Tolerância'};
+const MAIN={v:'f',e:'i',s:'c'};
+const PERKS={2:'Cafezinho: +10 pontos de chance no suborno do guarda.',4:'Marmita de respeito: +5 de estamina em toda comida.',6:'+5 pontos de chance nos roubos violentos.',11:'Blefe tão bom que o calor sobe 30% menos.',24:'A mamãe protege: você não perde dinheiro quando é preso.'};
+const CARTAS=[['her','💰','Herança do tio','+R$ 600 no bolso.'],['chi','🩴','Chinelo da sorte','Você começa com o chinelo equipado.'],['tk','🎟️','Passe livre','+10 ingressos do baile.'],['int','🧠','Cabeça boa','+3 de Inteligência.'],['for','💪','Marmitão da mãe','+3 de Força.'],['car','😏','Lábia de berço','+3 de Carisma.'],['del','🚔','Cunhado delegado','Toda pena de cadeia da rodada é 25% menor.'],['sor','🍀','Dia de sorte','+5 pontos de chance em todos os roubos.'],['jaq','🧥','Jaqueta emprestada','Você começa com a jaqueta jeans equipada.']];
+const MESAS=[['Bar do Tião','🍺',10,5000,0],['Casa de Apostas','🎩',500,1000000,20],['Salão VIP','👑',20000,0,100]];
+// nome, emoji, comissão por dia, calor por hora, risco de cair por dia, pena em min, respeito, roubo de referência para o suborno
+const LAR=[['Laranja do bar do Tião','🍺',400,1,.06,30,10,2],['Laranja da empresa de fachada','🏢',3000,2,.10,90,60,6],['Laranja de político','🏛️',25000,3,.14,240,250,11]];
+
+// eventos: r=1 acontece fora do baile
+const EVX={
+ dj:{r:0,tt:'🎧 O DJ aceita pedido',c:()=>30,d:c=>`Por ${fmt(c)} ele toca a sua música. 60% de chance de embalar o baile e te dar +12 de estamina.`,y:'Pedir música',n:'Deixar quieto',yes:()=>{if(Math.random()<.6){state.st=Math.min(maxSt(),state.st+12);return '🎧 Tocou a sua música e o baile cantou junto: +12 de estamina.'}return '🎧 Ele tocou outra música e ficou com a gorjeta.'},no:'Você ficou na sua.'},
+ rifa:{r:0,tt:'🎟️ Rifa do baile',c:()=>50,d:c=>`Um rapaz vende rifa por ${fmt(c)}. O prêmio é uma TV de 14 polegadas, que ele recompra por R$ 800. Chance de ganhar: 12%.`,y:'Comprar rifa',n:'Passar direto',yes:()=>{if(Math.random()<.12){state.cash+=800;return '🎟️ Ganhou a rifa! Vendeu a TV por R$ 800.'}return '🎟️ O número era de outra pessoa.'},no:'Você seguiu andando.'},
+ seguranca:{r:0,tt:'🕴️ O segurança te olha torto',c:()=>40,d:c=>`Dá para resolver com ${fmt(c)} de agrado. Se encarar, 50% de chance de ele te colocar para fora do baile.`,y:'Dar o agrado',n:'Encarar',yes:'🕴️ Ele fingiu que não viu nada.',no:()=>{if(Math.random()<.5){state.inBaile=false;return '🕴️ O segurança te colocou para fora do baile.'}return '🕴️ Ele desistiu e foi encher o saco de outro.'}},
+ foto:{r:0,tt:'📸 Fotógrafo do baile',c:()=>0,d:()=>'Quer uma foto sua para a página do baile. Posar dá +1 de respeito e treina o carisma, mas a foto circula: +3 de calor.',y:'Posar',n:'Esconder o rosto',yes:()=>{state.rep+=1;state.heat=Math.min(100,state.heat+3);const u=gainXp('c',2);return '📸 A foto saiu boa. +1 de respeito'+(u?' e +1 de carisma.':'.')},no:'Você virou o rosto. Saiu só o boné.'},
+ amigo:{r:0,tt:'🤝 Um amigo pede dinheiro emprestado',c:()=>100,d:c=>`Pede ${fmt(c)} e promete pagar em dobro. 50% de chance de ele voltar com o dinheiro.`,y:'Emprestar',n:'Dizer que está sem',yes:()=>{if(Math.random()<.5){state.cash+=200;return '🤝 Ele voltou e pagou R$ 200.'}return '🤝 Ele sumiu. O número agora é de outra pessoa.'},no:'Você disse que estava na pindura também.'},
+ pix:{r:1,tt:'📲 Um Pix caiu errado na sua conta',c:()=>0,d:()=>'R$ 300 de alguém que digitou errado. Devolver dá +1 de respeito. Ficar com o dinheiro rende R$ 300, com 15% de chance de o banco estornar e cobrar taxa.',y:'Devolver',n:'Ficar com o dinheiro',yes:()=>{state.rep+=1;return '📲 Você devolveu o Pix. +1 de respeito.'},no:()=>{if(Math.random()<.15){state.cash=Math.max(0,state.cash-100);return '📲 O banco estornou e ainda cobrou taxa: −R$ 100.'}state.cash+=300;return '📲 Ficou com os R$ 300. Ninguém reclamou.'}},
+ blitz:{r:1,tt:'🚓 Blitz na esquina',c:()=>60,d:c=>`Dá para dar um agrado de ${fmt(c)} ou arriscar. Com calor alto (acima de 50) a chance de ser parado é bem maior.`,y:'Dar o agrado',n:'Arriscar',yes:'🚓 O policial olhou para o outro lado.',no:()=>{if(Math.random()<(state.heat>=50?.6:.2)){const l=Math.floor(state.cash*.1);state.cash-=l;state.heat=Math.min(100,state.heat+10);return `🚓 Te pararam e levaram ${fmt(l)}. +10 de calor.`}return '🚓 Você passou batido.'}},
+ informante:{r:1,mh:20,tt:'🕵️ Um informante te encontra',c:()=>Math.max(30,Math.round(state.cash*.03)),d:c=>`Ele sabe de você e pede ${fmt(c)} para ficar quieto. Se recusar, 50% de chance de ele falar e o calor subir 10.`,y:'Pagar',n:'Recusar',yes:()=>{state.heat=Math.max(0,state.heat-8);return '🕵️ Ele sumiu com o dinheiro e o calor baixou um pouco.'},no:()=>{if(Math.random()<.5){state.heat=Math.min(100,state.heat+10);return '🕵️ Ele falou. +10 de calor.'}return '🕵️ Ele só resmungou e foi embora.'}},
+ aviso:{r:1,mh:20,tt:'📞 Um conhecido avisa da batida',c:()=>0,d:()=>'"Vai ter batida na sua rua." Se esconder agora custa 10 de estamina e baixa 15 de calor. Ignorar tem 30% de chance de a polícia aparecer e levar 10% do seu dinheiro.',y:'Se esconder',n:'Ignorar',yes:()=>{state.st=Math.max(0,state.st-10);state.heat=Math.max(0,state.heat-15);return '📞 Você sumiu por umas horas. −10 de estamina e −15 de calor.'},no:()=>{if(Math.random()<.3){const l=Math.floor(state.cash*.1);state.cash-=l;return `📞 A polícia apareceu e levou ${fmt(l)}.`}return '📞 A batida passou longe.'}},
+ jornal:{r:1,mh:50,tt:'📰 Seu rosto saiu no jornal',c:()=>Math.max(50,Math.round(state.cash*.02)),d:c=>`A matéria fala de você. Abafar custa ${fmt(c)} e baixa 10 de calor. Deixar passar sobe 5 de calor e dá +1 de respeito.`,y:'Abafar',n:'Deixar passar',yes:()=>{state.heat=Math.max(0,state.heat-10);return '📰 A matéria saiu da página principal. −10 de calor.'},no:()=>{state.heat=Math.min(100,state.heat+5);state.rep+=1;return '📰 Todo mundo leu. +1 de respeito e +5 de calor.'}},
+ pastel:{r:1,tt:'🥟 Vendedor ambulante de pastel',c:()=>15,d:c=>`Pastel quente por ${fmt(c)}: +8 de estamina.`,y:'Comprar',n:'Seguir',yes:()=>{state.st=Math.min(maxSt(),state.st+8);return '🥟 Pastel de vento, mas matou a fome: +8 de estamina.'},no:'Você seguiu andando.'}
+};
+const BAILEV=['dica','briga','relogio',...Object.keys(EVX).filter(k=>!EVX[k].r)],RNDEV=Object.keys(EVX).filter(k=>EVX[k].r);
+const ESTILO=[{d:'Sem efeito de faixa. Cada arma tem o seu jeito.'},{d:'Silenciosas: o roubo gera 25% menos calor.',heat:.75},{d:'Chance +6 pontos, mas o roubo gera 30% mais calor.',ch:.06,heat:1.3},{d:'Pagam 25% mais por roubo, mas a pena de cadeia é 20% maior.',gain:1.25,pena:1.2},{d:'Chance +5 pontos, pagam 40% mais e esquentam 20% menos.',ch:.05,gain:1.4,heat:.8}];
+Object.assign(PERKS,{25:'Receita da vovó: +10 de estamina em toda comida.',26:'+8 pontos de chance nos roubos violentos.',27:'Arma de família: o roubo gera 20% menos calor.',28:'Churrasco de respeito: a pena de cadeia é 10% menor.'});
+const WOK={2:'Você sacou o chinelo e ninguém discutiu.',4:'A frigideira de ferro falou mais alto.',5:'A garrafa quebrada convenceu rápido.',6:'O soco inglês fez a diplomacia.',7:'A faca de rocambole ainda tinha cobertura.',11:'A arma de brinquedo enganou todo mundo.',13:'A espingarda de chumbinho fez barulho suficiente.',16:'A escopeta resolveu a conversa.',21:'A bazuca nem precisou ser usada.',24:'O Chinelo Dourado brilhou e ninguém reagiu.'};
+Object.assign(WOK,{25:'O rolo de macarrão da vovó resolveu.',26:'A espada de camelô brilhou mais que o troco.',27:'O revólver era do vovô, mas a coragem era sua.',28:'Cheirou a churrasco e ninguém reagiu.'});
+const WKO={2:'O chinelo não impressionou ninguém.',4:'A frigideira estava mais pesada do que a coragem.',11:'Alguém percebeu que a arma era de brinquedo.',24:'Nem o Chinelo Dourado salvou.'};
+const WFX={ok:['Na raça.','Na lâmina.','No blefe.','No peso.','Na lenda.'],ko:['Faltou argumento.','A lâmina não bastou.','O blefe não colou.','Nem o peso adiantou.','Nem a lenda ajudou.']};
+const BAILES=['Baile do Beco','Baile da Laje','Baile do Galpão','Baile da Ponte','Baile do Campinho','Baile da Garagem','Baile do Terreirão'];
+const CENAS=['O DJ emendou um funk atrás do outro.','A pista lotou e ninguém mais cabe.','Alguém derrubou o isopor de cerveja.','Rolou uma roda de pagode no fundo.','O segurança está de olho em você.','A luz piscou e a pista gritou.','Tem fila no banheiro e no churrasquinho.','O som estourou o alto-falante de novo.'];
+const ANIM=[[30,'Esquentando'],[60,'Animado'],[90,'Pegando fogo'],[101,'Lendário']];
+const NPCS=[['Zé da Feira',30],['Tiozão da Sunga',60],['Bina do Pix',100],['Marcão Chinelo',160],['Dona Cida do Bicho',250],['Careca do Desmanche',400],['Tio Beto Cachaça',600],['Japa da Joalheria',900],['Neguinho do Lava-Jato',1300],['Bruxo do Cofre',1900],['Doutor Corrupto',2800]];
+const SYM=['🦁','💰','🍒','🎰','🍋','⭐'];
+const TT=['','Pavio Curto','Perigoso','Terror do Bairro','Lenda do Pavor'];
+const MT=['','Cara de Pau','Espertalhão','Mestre do 171','Rei da Lábia'];
+const UPS=[['cof','💰','Cofrinho','+R$ 150 de dinheiro inicial por nível',5],['fol','🫁','Fôlego','+5 de estamina máxima por nível',4],['fig','🍺','Fígado de aço','−8% de ressaca ganha por nível',4],['pol','🚔','Primo na polícia','−10% de tempo de cadeia por nível',3]];
+// faixas de calor: limite, nome, perda de chance, multiplicador da pena, classe
+const HB=[[20,'Frio',0,1,'hok'],[50,'Morno',.05,1.25,'hmo'],[80,'Quente',.15,1.6,'hqu'],[101,'Caçado',.25,2,'hca']];
+const HINT={hok:'Sem problema. Pode continuar roubando.',hmo:'Dá para arriscar, mas a chance já caiu 5 pontos e a pena fica 25% maior.',hqu:'Melhor esperar ou despistar. A chance caiu 15 pontos e a pena é 60% maior.',hca:'Pare. A chance caiu 25 pontos e a cadeia vai ser o dobro.'};
+const FASEIC=['😌','👀','🚓','🚁'],FASEN=['Ninguém desconfia','Vizinho desconfiado','Viatura passando','Helicóptero na rua'],HG=[1,1,1.15,1.3];
+const INFO={
+ tk:'Ingressos: cada entrada no baile gasta 1. Você ganha 4 por dia.',
+ ress:'Ressaca: sobe quando você bebe. Reduz a estamina máxima. Acima de 50 a bebida rende metade e a estamina volta mais devagar, acima de 80 a chance dos roubos cai, e em 100 você vai para o hospital. Remédio fica na Loja, em Farmácia (toque no chip da ressaca).',
+ heat:'Calor: o quanto a polícia está atrás de você. Quanto maior, menor a chance nos roubos e mais longa a cadeia. Esfria sozinho com o tempo.',
+ resp:'Respeito é o seu placar. Vem dos roubos e do patrimônio, decide sua posição no ranking e libera roubos mais pesados.'
+};
+const DICAS={
+ roubar:'Aqui você rouba. A porcentagem é a chance de dar certo. Cada tipo de roubo usa um atributo (💪 violento, 🧠 golpe, 😏 lábia), e o card mostra de onde vem o seu poder. Cada sucesso treina esse atributo. A chance sobe com a prática e o respeito, e cai com o calor. Se der ruim, é cadeia e você perde 20% do dinheiro na mão.',
+ noite:'O Cassino tem blackjack em mesas de aposta crescente e o Leãozinho da Sorte. No Baile, entrar gasta 1 ingresso, dura 3 horas e te prende lá dentro: sem roubo, loja nem negócios. Bebida forte, paquera e eventos só aqui.',
+ loja:'Armas, proteção e casa. Você guarda o que compra e escolhe o que usar. A arma equipada muda o seu poder em cada tipo de roubo, e algumas têm um efeito extra (★).',
+ neg:'Renda passiva rende sozinha, mas pode ser roubada. Empresas produzem e custam por dia. Ser laranja paga comissão, mas segura o calor e pode cair. No banco o dinheiro rende e fica protegido.',
+ eu:'Seu personagem, os atributos (que sobem com o uso), a mochila e o ranking. O respeito é o placar da rodada.',
+};
+const claimed=()=>Object.values(state.md||{}).some(v=>v==2)||Object.values((meta&&meta.md)||{}).some(v=>v==2);
+const everA=i=>(state.ever||[]).includes(i);
+const rendaN=()=>state.renda.reduce((x,y)=>x+y,0);
+// [texto, condição, prêmio em dinheiro]
+const MISP={
+ malandro:[
+  ['Faça seu primeiro roubo (aba Roubar).',()=>state.nrob>=1,0],
+  ['Compre um chinelo na Loja, em Armas.',()=>everA(2),0],
+  ['Entre no baile (aba Noite, botão Baile).',()=>state.baN>=1,15],
+  ['Faça 5 roubos e veja seus atributos subirem (aba Eu).',()=>state.nrob>=5,0],
+  ['Chegue a 10 de respeito (a aba Negócios abre) e compre uma renda passiva.',()=>(state.rbN||0)>=1,15],
+  ['Recolha a renda passiva (aba Negócios). Ela acumula com o tempo.',()=>(state.recN||0)>=1,0],
+  ['Abra a aba Metas (em Eu) e veja o que dá para conquistar.',()=>!!state.vm,15]],
+ golpista:[
+  ['Faça o Bilhete premiado, seu golpe de entrada (aba Roubar).',()=>!!(state.did&&state.did[2]),0],
+  ['Faça 3 golpes de inteligência ou lábia (Bilhete, Bicicleta, Arrombar).',()=>(state.ng||0)>=3,15],
+  ['Compre o Dedo no bolso, a arma de blefe barata (Loja, Armas).',()=>everA(1),0],
+  ['Entre no baile e paquere (aba Noite).',()=>state.baN>=1&&(state.paqT||0)>=1,15],
+  ['Deposite dinheiro no banco (Negócios abre com 10 de respeito).',()=>(state.depN||0)>=1,0],
+  ['Compre uma renda passiva (aba Negócios).',()=>(state.rbN||0)>=1,15],
+  ['Resgate sua primeira meta (Eu, Metas).',()=>claimed(),0]],
+ bruta:[
+  ['Faça 3 roubos violentos (Trombada ou Bolsa de velhinha).',()=>(state.nv||0)>=3,0],
+  ['Compre o Pedaço de pau na Loja, em Armas.',()=>everA(3),15],
+  ['Entre no baile e dance (aba Noite, Interações).',()=>state.baN>=1&&(state.nd||0)>=1,0],
+  ['Ganhe uma briga no baile (Interações).',()=>(state.nbw||0)>=1,15],
+  ['Compre a Jaqueta jeans, sua primeira proteção (Loja, Proteção).',()=>(state.ownP||[]).includes(1),0],
+  ['Faça 10 roubos.',()=>state.nrob>=10,15],
+  ['Veja sua Força no Perfil (aba Eu).',()=>!!state.vp,0]],
+ bicheiro:[
+  ['Faça 3 roubos para ganhar respeito (aba Roubar).',()=>state.nrob>=3,0],
+  ['Compre um chinelo na Loja, em Armas.',()=>everA(2),0],
+  ['Entre no baile (aba Noite).',()=>state.baN>=1,15],
+  ['Chegue a 10 de respeito e compre sua primeira renda passiva (aba Negócios).',()=>(state.rbN||0)>=1,15],
+  ['Tenha 3 itens de renda passiva, você tem 10 vagas.',()=>rendaN()>=3,0],
+  ['Recolha a renda passiva.',()=>(state.recN||0)>=1,15],
+  ['Resgate sua primeira meta (Eu, Metas).',()=>claimed(),0]],
+ empresario:[
+  ['Chegue a 10 de respeito fazendo roubos (a aba Negócios abre).',()=>resp()>=10,0],
+  ['Deposite dinheiro no banco (aba Negócios).',()=>(state.depN||0)>=1,15],
+  ['Compre uma renda passiva.',()=>(state.rbN||0)>=1,0],
+  ['Recolha a renda passiva.',()=>(state.recN||0)>=1,15],
+  ['Entre no baile (aba Noite).',()=>state.baN>=1,0],
+  ['Compre uma arma na Loja.',()=>(state.ever||[]).length>=2,15],
+  ['Veja seu Perfil (aba Eu).',()=>!!state.vp,0]]
+};
+const misList=()=>MISP[state.p]||MISP.malandro;
+const misLen=()=>misList().length;
+
+let state=null,meta=null,tab='roubar',scr='titulo',toastT,nTick=0,infoK=null;
+const openCards={};
+const OPEN={},DEF={};
+const dd=(k,t,b,def)=>{DEF[k]=!!def;const o=OPEN[k]===undefined?!!def:OPEN[k];return `<div class="dd"><button class="ddh ${o?'on':''}" onclick="G.dd('${k}')"><span>${t}</span><i>${o?'▾':'▸'}</i></button>${o?`<div class="ddb">${b}</div>`:''}</div>`};
+const subs={noite:'cassino',loja:'armas',eu:'perfil',faixa:0};
+const G={};
+
+function save(){try{localStorage.setItem('chefao_v13',JSON.stringify(state))}catch(e){}}
+function saveMeta(){try{localStorage.setItem('chefao_v2_meta',JSON.stringify(meta))}catch(e){}}
+function load(){
+ try{const s=localStorage.getItem('chefao_v13');if(s)state=JSON.parse(s)}catch(e){}
+ try{const m=localStorage.getItem('chefao_v2_meta');if(m)meta=JSON.parse(m)}catch(e){}
+ if(!meta)meta={pl:0,rounds:0,best:0,up:{cof:0,fol:0,fig:0,pol:0}};
+ meta.cn=meta.cn||{pr:0,hosp:0,bw:0};meta.ach=meta.ach||{};meta.upLog=meta.upLog||[];meta.col=meta.col||{a:[],p:[],h:[]};meta.did=meta.did||[];meta.md=meta.md||{};meta.est=meta.est||0;
+}
+function newState(p){
+ return {p,t:0,last:null,lastTs:Date.now(),speed:1,cash:150+150*meta.up.cof+100*(meta.est||0),bank:0,debt:0,st:100,tk:10,ress:0,rep:0,heat:0,tm:0,ml:0,
+  a:Object.assign({},A0[p]),arma:0,own:[0],prot:0,ownP:[0],casa:0,renda:RENDA.map(()=>0),lastCol:0,emp:[],
+  jail:0,jailLen:0,jailR:0,inBaile:false,baileEnd:0,ev:null,paq:0,dica:false,lastAvg:30,seen:{},mis:0,nrob:0,baN:0,ax:{f:0,i:0,c:0,t:0},cpena:1,cch:0,lar:-1,rev:null,mesa:0,bjBest:0,cassLucro:0,jailWhy:'',anim:0,bg:{st:0,mt:0},moral:0,moralUntil:0,primo:0,novaArma:null,hide:null,rec:{},larEnd:0,larStart:0,larAdv:0,larDone:0,adv:0,pol:0,polAtraso:0,md:{},did:{},ficha:0,lastArrest:0,hs:0,ever:[],su:0,sw:0,nj:0,tj:0,rs:{rob:0,bai:0,met:0},lastPos:0,bestPos:99,bestT:0,pass:[],cd:{d:0,b:0,f:0},rb:[],rx:null,nv:0,ng:0,nd:0,nbw:0,paqT:0,depN:0,recN:0,rbN:0,vp:0,vm:0,
+  foodDay:0,foodN:0,spins:0,over:false,log:[],bj:null,slot:null,lastBet:100};
+}
+function chkMis(){
+ state.ever=state.ever||[];state.own.forEach(i=>{if(!state.ever.includes(i))state.ever.push(i)});
+ const L=misList();
+ while(state.mis<L.length){
+  const st=L[state.mis];
+  if(!st[1]())break;
+  state.mis++;
+  if(state.mis>=L.length){state.cash+=100;say('🎯 Missões feitas: +R$ 100 de presente.')}
+  else if(st[2]){state.cash+=st[2];say(`🎯 Missão cumprida: +R$ ${st[2]}.`)}
+ }
+ chkMetas();
+}
+const A=f=>(...a)=>{if(!state||state.over)return;sync();f(...a);chkMis();chkAch();save();render()};
+function say(m){state.log.unshift(m);state.log.length=Math.min(state.log.length,15);const el=$('toast');el.textContent=m;el.className='show';clearTimeout(toastT);toastT=setTimeout(()=>{el.className=''},3200)}
+
+// ---- derivados
+const tier=x=>x>=150?4:x>=60?3:x>=20?2:x>=5?1:0;
+const soma=()=>state.a.f+state.a.i+state.a.c+state.a.t;
+const pwA=(tp,ai,pi)=>{const w=W[tp],a=state.a,ar=ARMAS[ai];return a.f*w.f+a.i*w.i+a.c*w.c+a.t*w.t+(tp=='v'?ar[3]:ar[4])+PROT[pi][3]};
+const pw=tp=>pwA(tp,state.arma,state.prot);
+const pwOf=r=>pw(r.tp);
+const maxSt=()=>Math.max(50,Math.floor(100+(state.a.t-5)*2+5*meta.up.fol-state.ress*.3+(meta.est||0)));
+const wResp=w=>w<=1e6?Math.floor(w/1e4):100+Math.floor((w-1e6)/1e5);
+const resp=()=>Math.floor(state.rep)+wResp(state.cash+state.bank);
+const rpTxt=n=>String(Math.round(n*100)/100).replace('.',',');
+const inJail=()=>state.t<state.jail;
+const busy=()=>inJail()||state.inBaile||isHid();
+const band=()=>HB.find(b=>state.heat<b[0]);
+const incMult=()=>state.p=='golpista'?.7:1;
+const riskMult=()=>state.p=='bruta'?2:state.p=='bicheiro'?.5:1;
+const slotsRenda=()=>state.p=='bicheiro'?10:5;
+const slotsEmp=()=>state.p=='empresario'?2:1;
+const mins=ms=>Math.max(1,Math.ceil(ms/60000))+' min';
+const isHid=()=>!!(state.hide&&state.t<state.hide.end);
+const bandI=()=>HB.findIndex(b=>state.heat<b[0]);
+const ES=()=>Object.assign({heat:1,gain:1,ch:0,pena:1},ESTILO[ARMAS[state.arma][5]]);
+const armaOk=r=>ARMAS[state.arma][5]>=r.fx;
+const ressIc=()=>{const r=state.ress;return r>=100?'🏥':r>=80?'🤮':r>=50?'🤢':r>=30?'🥴':r>=10?'🙂':'😎'};
+const foodB=()=>state.arma==4?5:state.arma==25?10:0;
+const penaMult=()=>(state.cpena||1)*ES().pena*(1+.06*Math.min(10,state.ficha||0))*(state.arma==28?.9:1);
+const POL=[null,['Guarda amigo','👮',300,20,'Cafezinho 30% mais barato e +10 pontos de chance.'],['Sargento','🎖️',1500,80,'Pena de cadeia 20% menor.'],['Delegado','🕴️',8000,250,'25% de chance de sair da cadeia em 5 minutos.'],['Comandante','⭐',40000,700,'De vez em quando avisa da batida e baixa o calor sozinho.']];
+const influencia=()=>state.emp.length*10+state.renda.reduce((a,n,i)=>a+(RENDA[i][2]>=150000?n*15:0),0)+(state.lar==2?30:0);
+const advPrice=()=>Math.max(3000,Math.round(2.2*(state.lastAvg||30)));
+const penaDesc=r=>{let d=.1*meta.up.pol+(state.pol>=2?.2:0);if(r.pena>=90)d*=.5;return 1-d};
+function afterJail(){
+ if(!inJail())return;
+ if(state.pol>=3&&Math.random()<.25&&state.jail-state.t>5*60000){state.jail=state.t+5*60000;state.jailLen=5*60000;say('🕴️ O delegado deu um telefonema: você sai em 5 minutos.')}
+ if(state.adv>0&&state.jail-state.t>=15*60000){state.adv=0;state.jail=0;say('⚖️ O advogado apareceu e soltou você na hora.')}
+}
+const apelido=()=>{const T=tier(state.tm),M=tier(state.ml);return T==0&&M==0?'Sem apelido ainda':(T>=M?TT[T]:MT[M])};
+const wtxt=(l,ok)=>{const a=ARMAS[l.w==null?0:l.w];return `${a[1]} ${(ok?WOK:WKO)[l.w]||(ok?WFX.ok:WFX.ko)[a[5]]} `};
+const animT=()=>ANIM.find(a=>(state.anim||0)<a[0]);
+const animBon=()=>{const a=state.anim||0;return a>=60?'+8 pontos de chance no próximo roubo':a>=30?'+4 pontos de chance no próximo roubo':'sem bônus de chance ainda'};
+const baileNome=()=>BAILES[(Math.floor(state.t/DAY)+state.baN)%BAILES.length];
+function endBaile(fim){
+ if(!state.inBaile)return;
+ const an=state.anim||0,rp=Math.floor(an/25),pm=an>=60?.08:an>=30?.04:0;
+ state.inBaile=false;state.ev=null;
+ state.rep+=rp;rsAdd('bai',rp);const up=gainXp('c',an/10);if(an>=60)state.heat=Math.max(0,state.heat-5);
+ state.moral=pm;state.moralUntil=state.t+3*HOUR;
+ say(`🪩 ${fim?'O baile acabou':'Você saiu do baile'}: animação ${Math.floor(an)}%, +${rp} de respeito${up?', +1 de carisma':''}${pm?` e +${Math.round(pm*100)} pontos de chance por 3 horas`:''}.`);
+}
+const need=a=>Math.round(4+(a-5)*1.2);
+const xpOf=r=>Math.max(1,Math.round(Math.sqrt(r.rp)));
+function gainXp(k,x){
+ state.ax=state.ax||{f:0,i:0,c:0,t:0};
+ state.ax[k]=(state.ax[k]||0)+x;let up=0;
+ while(state.ax[k]>=need(state.a[k])){state.ax[k]-=need(state.a[k]);state.a[k]++;up++}
+ return up;
+}
+function attrNow(k){
+ const a=state.a;
+ if(k=='f')return `poder ${a.f*4} nos roubos violentos`;
+ if(k=='i')return `poder ${a.i*4} nos golpes espertos`;
+ if(k=='c')return `poder ${a.c*4} na lábia, ${Math.round(Math.min(.8,Math.max(.2,.35+(a.c-5)*.02))*100)}% de chance na paquera, +${Math.max(0,a.c-5)} pontos no suborno`;
+ return `ressaca ganha −${Math.round(Math.min(.5,Math.max(0,(a.t-5)*.02))*100)}%, +${Math.max(0,(a.t-5)*2)} de estamina máxima`;
+}
+const despPer=()=>Math.max(3,Math.round((state.lastAvg||30)*.04));
+const despCost=()=>Math.round(Math.min(25,state.heat)*despPer());
+const bonusPr=i=>Math.min(.2,((state.pr&&state.pr[i])||0)*.01);
+const bonusResp=()=>Math.min(.1,Math.floor(resp()/15)*.01);
+function jailPrev(r){const T=tier(state.tm);return {len:Math.max(5*60000,Math.round(r.pena*60000*band()[3]*(1+.1*T)*penaDesc(r)*penaMult())),lost:state.arma==24?0:Math.floor(state.cash*.2)}}
+function chanceOf(r){
+ const i=ROUBOS.indexOf(r),ratio=pwOf(r)/Math.max(r.pw,10);
+ let c=ratio>=1?.7+.28*Math.min(1,ratio-1):.7*ratio*ratio;
+ c+=bonusPr(i)+bonusResp();
+ if(state.p=='golpista')c+=.15;if(state.p=='bicheiro')c-=.1;if(r.tp=='v')c+=state.arma==6?.05:state.arma==26?.08:0;c+=state.cch||0;c+=ES().ch;c+=state.t<(state.moralUntil||0)?(state.moral||0):0;
+ c-=band()[2];if(state.dica)c+=.15;c-=Math.min(.08,(state.ficha||0)*.015);if(state.ress>=80)c-=.1;else if(state.ress>=50)c-=.03;
+ return Math.min(.98,Math.max(.05,c));
+}
+function rewardMult(r){const ratio=pwOf(r)/Math.max(r.pw,10);return ratio<=2?1:Math.max(.5,2/ratio)}
+function pendente(){const days=Math.min(state.t-state.lastCol,2*DAY)/DAY;let s=0;RENDA.forEach((it,i)=>{s+=it[3]*state.renda[i]});return s*days*incMult()}
+function trackPos(){
+ if(resp()<=0)return;
+ const l=rankList(),pos=l.findIndex(x=>x.me)+1;
+ if(state.lastPos&&pos<state.lastPos){const passed=l.slice(pos,state.lastPos).map(x=>x.n);state.pass=state.pass||[];state.pass.push({t:state.t,pos,n:passed.join(', ')});if(state.pass.length>30)state.pass.shift()}
+ state.lastPos=pos;if(pos<(state.bestPos||99)){state.bestPos=pos;state.bestT=state.t}
+}
+function rankList(){
+ const l=NPCS.map(n=>({n:n[0],r:Math.floor(n[1]*state.t/ROUND)}));
+ l.push({n:'Você',r:resp(),me:true});
+ l.sort((a,b)=>b.r-a.r);return l;
+}
+function metaLine(){
+ const l=rankList(),i=l.findIndex(x=>x.me);
+ if(i==0)return '🏆 Você está em 1º lugar no ranking.';
+ const n=l[i-1];return `🏆 Faltam ${num(n.r-resp()+1)} de respeito para passar ${n.n} e subir para ${i}º.`;
+}
+function jailInfo(){
+ const r=ROUBOS[state.jailR]||ROUBOS[0],rem=Math.max(0,state.jail-state.t),frac=state.jailLen?rem/state.jailLen:1,M=tier(state.ml);
+ const base=(r.g[0]+r.g[1])/2*.18;
+ const sub=Math.max(5,Math.round(base*frac*(1-.08*M)*(state.pol>=1?.7:1))),fia=Math.max(15,Math.round(sub*3));
+ let ch=.8+(state.a.c-5)*.01+.03*M+(state.arma==2?.1:0)+(state.pol>=1?.1:0);ch-=state.jailR>=9?.1:state.jailR>=6?.05:0;
+ return {r,rem,sub,fia,ch:Math.min(.95,Math.max(.5,ch))};
+}
+
+// ---- tempo
+function sync(){const now=Date.now();advance((now-state.lastTs)*state.speed);state.lastTs=now}
+function advance(dt){
+ while(dt>0&&!state.over){
+  const h=Math.min(dt,HOUR/2,ROUND-state.t);dt-=h;
+  if(h<=0){state.over=true;break}
+  step(h);
+  if(state.t>=ROUND-1){state.over=true;state.t=ROUND}
+ }
+ if(state.over)endRound();
+}
+function step(h){
+ const f=h/HOUR;const wasJail=state.t<state.jail;state.t+=h;
+ if(wasJail&&gainXp('f',1.5*f))say('🏋️ Academia da cadeia: +1 Força');
+ if(state.hide){const t0=state.t-h,ov=Math.max(0,Math.min(state.t,state.hide.end)-t0);state.heat=Math.max(0,state.heat-state.hide.drop*ov/state.hide.dur);if(state.hide.hosp)state.ress=Math.max(0,state.ress-45*ov/state.hide.dur);if(state.t>=state.hide.end){say(state.hide.hosp?'🏥 Você teve alta. A ressaca baixou.':'🏠 Você saiu do esconderijo. O calor baixou.');state.hide=null}}
+ const mx=maxSt();
+ const rg=10*CASAS[state.casa][3]*f*(state.inBaile?2:1)*(state.ress>=50?.6:1);
+ if(state.st>=mx)state.sw=(state.sw||0)+rg;
+ if(state.st<mx){const ns=Math.min(mx,state.st+rg);state.sw=(state.sw||0)+Math.max(0,state.st+rg-mx);if(state.inBaile&&state.bg)state.bg.st+=ns-state.st;state.st=ns}
+ state.tk=Math.min(40,state.tk+4/24*f);
+ trackPos();
+ state.ress=Math.max(0,state.ress-.5*f);state.ficha=Math.max(0,(state.ficha||0)-.5/24*f*(state.pol>=2?2:1));
+ state.heat=Math.max(0,state.heat-3*f*(state.inBaile?2:1));
+ if(state.bank>0)state.bank+=Math.min(state.bank,100000)*.02/24*f;
+ state.emp.forEach(i=>{
+  const cost=EMP[i][3]/24*f,prod=EMP[i][4]*(state.p=='empresario'?1.3:1)/24*f;
+  if(state.debt>0)state.debt+=cost;
+  else if(state.cash>=cost){state.cash-=cost;state.cash+=prod}
+  else state.debt+=cost;
+ });
+ if(state.inBaile){
+  if(state.t>=state.baileEnd)endBaile(true);
+  else{state.anim=Math.min(100,(state.anim||0)+6*f);if(!state.ev&&Math.random()<.5*f)state.ev={k:pick(BAILEV)}}
+ }
+ if(!state.inBaile&&!state.rev&&state.t>=state.jail&&Math.random()<.06*f*(1+state.heat/40))state.rev={k:pick(RNDEV.filter(k=>state.heat>=(EVX[k].mh||0))),until:state.t+4*HOUR};
+ if(state.rev&&state.t>state.rev.until)state.rev=null;
+ if(state.lar>=0){
+  const L=LAR[state.lar];
+  state.cash+=L[2]/24*f;state.heat=Math.min(100,state.heat+L[3]*f);
+  if(state.t>=state.larEnd){
+   const rp=2+Math.floor(L[6]/5);state.cash+=L[2];state.rep+=rp;state.larDone=(state.larDone||0)+1;state.lar=-1;
+   say(`🍊 Contrato cumprido! Bônus de ${fmt(L[2])} e +${rp} de respeito.`);
+  }else if(state.t>=state.jail&&Math.random()<L[4]*(1-.15*Math.min(2,state.larDone||0))*f/24){
+   const len=Math.round(L[5]*60000*(1-.1*meta.up.pol)*(state.cpena||1)),left=Math.round((state.larAdv||0)*Math.max(0,state.larEnd-state.t)/(3*DAY));
+   state.cash=Math.max(0,state.cash-left);
+   state.lar=-1;state.jail=state.t+len;state.jailLen=len;state.nj=(state.nj||0)+1;state.tj=(state.tj||0)+len;meta.cn.pr++;state.jailR=L[7];state.jailWhy='Esquema de laranja que caiu';state.ficha=Math.min(10,(state.ficha||0)+1);state.lastArrest=state.t;
+   state.inBaile=false;state.ev=null;state.rev=null;state.hide=null;state.heat=Math.min(100,state.heat+10);state.last=null;
+   say('🍊 O esquema caiu e o nome no papel era o seu. Preso por '+mins(len)+'.'+(left?' Você perdeu '+fmt(left)+' do adiantamento.':''));afterJail();
+  }
+ }
+ if(state.pol>0){
+  const P=POL[state.pol],c=P[2]/24*f;
+  if(state.cash>=c){state.cash-=c;state.polAtraso=0}
+  else{state.polAtraso=(state.polAtraso||0)+f;if(state.polAtraso>=12){state.pol--;state.polAtraso=0;state.heat=Math.min(100,state.heat+15);say('🚔 A mesada atrasou e o contato te entregou. Você perdeu um nível e o calor subiu.')}}
+  if(state.pol>=4&&state.heat>=20&&Math.random()<.04*f){state.heat=Math.max(0,state.heat-15);say('🚔 O comandante avisou da batida. −15 de calor.')}
+ }
+}
+
+const ACH=[
+['a1','🦹','Primeiro Corre','Fez o primeiro roubo.',0,()=>state&&state.nrob>=1],
+['a2','🔪','Armado','Comprou uma arma.',0,()=>state&&(state.ever||[]).length>=2],
+['a3','💃','Pé de Valsa','Dançou no baile.',0,()=>state&&state.nd>=1],
+['a4','🧯','Primeira Cela','Foi preso pela primeira vez.',0,()=>meta.cn.pr>=1],
+['b1','📋','Cliente Cativo','Foi preso 10 vezes.',1,()=>meta.cn.pr>=10,1],
+['b2','🏥','Hospital VIP','Passou mal e foi parar no hospital.',1,()=>meta.cn.hosp>=1,1],
+['b3','🥊','Brigão de Bar','Ganhou 5 brigas.',1,()=>meta.cn.bw>=5,1],
+['b4','🪩','Rei da Pista','Chegou a 100% de animação no baile.',1,()=>state&&(state.anim||0)>=100,1],
+['b5','🏅','Pódio','Terminou uma rodada entre os 3 primeiros.',1,()=>meta.best>0&&meta.best<=3],
+['b6','💯','Mão Leve','Fez 100 roubos numa rodada.',1,()=>state&&state.nrob>=100],
+['b7','🎒','Veterano de Chinelo','Jogou 3 rodadas.',1,()=>meta.rounds>=3],
+['c1','👑','Chefão de Chinelo','Terminou uma rodada em 1º.',2,()=>meta.best==1],
+['c2','💰','Primeiro Milhão','Chegou a R$ 1 milhão de patrimônio.',2,()=>state&&state.cash+state.bank>=1e6],
+['c3','⭐','Estrela de Prestígio','Ganhou uma estrela de prestígio.',2,()=>meta.est>=1],
+['c4','🏛️','Lenda da Quebrada','Jogou 5 rodadas.',2,()=>meta.rounds>=5]
+];
+const TIERN=['Bronze','Prata','Ouro'],TIERI=['🥉','🥈','🥇'];
+function chkAch(){
+ if(!meta)return;
+ ACH.forEach(a=>{if(!meta.ach[a[0]]){let ok=false;try{ok=!!a[5]()}catch(e){}if(ok){meta.ach[a[0]]=Date.now();saveMeta();if(state&&!state.over)say(TIERI[a[4]]+' Conquista: '+a[2])}}});
+ if(!meta.ach.plat&&ACH.every(a=>meta.ach[a[0]])){meta.ach.plat=Date.now();saveMeta();if(state)say('🏆 PLATINA! Você pegou todas as conquistas.')}
+}
+function vMural(){
+ const n=ACH.filter(a=>meta.ach[a[0]]).length,t=ACH.length,pl=!!meta.ach.plat;
+ let h=card(`<div class="tro"><div class="ic">${pl?'🏆':'🔒'}</div><div class="gr"><b>Platina ${pl?'conquistada':''}</b><div class="mu">${n} de ${t} conquistas${pl?' · '+new Date(meta.ach.plat).toLocaleDateString('pt-BR'):''}</div></div></div><div class="pbar"><i style="width:${n/t*100}%"></i></div>`);
+ [2,1,0].forEach(tr=>{
+  h+=`<h3>${TIERI[tr]} ${TIERN[tr]}</h3>`;
+  ACH.filter(a=>a[4]==tr).forEach(a=>{const d=meta.ach[a[0]];
+   h+=card(`<div class="tro ${d?'':'lk'}"><div class="ic">${d?a[1]:'❔'}</div><div class="gr"><b>${d||!a[6]?a[2]:'???'}</b><div class="mu">${d?a[3]+' · '+new Date(d).toLocaleDateString('pt-BR'):a[6]?'Conquista escondida. Continue jogando.':a[3]}</div></div></div>`)});
+ });
+ return h;
+}
+function rsAdd(k,v){if(!state)return;state.rs=state.rs||{rob:0,bai:0,met:0};state.rs[k]=(state.rs[k]||0)+v}
+function endRound(){
+ if(state.paid)return;
+ try{METAS.filter(m=>!m[8]&&metaReady(m)).forEach(payMeta)}catch(e){}
+ const l=rankList(),pos=l.findIndex(x=>x.me)+1;
+ const g=Math.max(1,13-pos)+Math.floor(resp()/50);
+ state.paid=true;state.plGain=g;state.pos=pos;
+ meta.pl+=g;meta.rounds++;meta.best=meta.best?Math.min(meta.best,pos):pos;saveMeta();
+}
+
+// ---- helpers de tela
+const btn=(l,fn,dis,cls='')=>`<button class="b ${cls}" ${dis?'disabled':''} onclick="${fn}">${l}</button>`;
+const card=(h,cls='')=>`<div class="c ${cls}">${h}</div>`;
+const row=(ic,t,sub,right)=>`<div class="row"><div class="ic">${ic}</div><div class="gr"><b>${t}</b><div class="mu">${sub}</div></div>${right||''}</div>`;
+const readNum=id=>{const e=$(id);return e?(Math.floor(parseFloat(e.value))||0):0};
+const subnav=(k,items)=>`<div class="sub">${items.map(i=>`<button class="${subs[k]==i[0]?'on':''}" onclick="G.sub('${k}','${i[0]}')">${i[1]}</button>`).join('')}</div>`;
+
+const reactE=()=>state.rx&&Date.now()-state.rx.t<4000?(state.rx.ok?'🤑':'⛓️'):PROF[state.p].e;
+function vHeader(){
+ if(state.ress>=25)state.hs=1;
+ const mx=maxSt(),pct=Math.max(0,Math.min(100,state.st/mx*100));
+ const l=rankList(),pos=l.findIndex(x=>x.me)+1,b=band();
+ const chips=[['tk','🎟️ Ingressos '+Math.floor(state.tk),''],['ress',ressIc()+' Ressaca '+Math.floor(state.ress),state.ress>=50?'bad':''],['heat',(state.ficha>=1&&bandI()==0)?'📋 Fichado '+Math.floor(state.ficha):FASEIC[bandI()]+' '+FASEN[bandI()],b[4]],['resp','⭐ Respeito '+num(resp())+' · '+pos+'º','']];
+ return `<div class="top"><span class="mini">${reactE()}<sup>${ARMAS[state.arma][1]}</sup></span><span>💵 ${fmt(state.cash)}</span><span>🏦 ${fmt(state.bank)}</span><span>📅 ${Math.min(7,Math.floor(state.t/DAY)+1)}/7</span></div>
+ <div class="bar"><i style="width:${pct}%"></i><span>⚡ ${Math.floor(state.st)}/${mx}</span></div>
+ <div class="chips">${chips.map(c=>`<button class="chip ${c[2]}" onclick="G.info('${c[0]}')">${c[1]}</button>`).join('')}</div>
+ ${infoK?`<div class="infob">${INFO[infoK]}</div>`:''}
+ ${state.mis<misLen()?`<div class="mis">🎯 Missão ${state.mis+1}/${misLen()}: ${misList()[state.mis][0]}</div>`:proxMetas()}
+ ${inJail()?`<div class="warn jb">🚔 PRESO · faltam ${mins(state.jail-state.t)}</div>`:''}
+ ${state.debt>0?`<div class="warn">Dívida das empresas: ${fmt(state.debt)} (empresas paradas)</div>`:''}`;
+}
+
+function vTitulo(){
+ return `<div id="body" class="tit"><div class="logo">🩴</div><h1 class="flick">Chefão<br>de Chinelo</h1><p class="mu">Você tem R$ 150, um chinelo e muita vontade de dar errado.<br>7 dias para virar o chefão da quebrada.</p><p>${btn('Começar','G.ir()',false)}</p><p class="mu">v13 de teste · só NPC · progresso salvo neste celular</p></div>`;
+}
+function vEscolha(){
+ let h=`<div id="body"><h1>Quem é você?</h1><p class="mu">Escolha a profissão. Cada uma tem um bônus e um defeito.</p>`;
+ Object.keys(PROF).forEach(k=>{const p=PROF[k];h+=card(`<div class="row"><div class="pt">${p.e}</div><div class="gr"><b style="font-size:18px">${p.n}</b><div class="bon">✔ ${p.b}</div><div class="def">✘ ${p.d}</div></div></div><div style="margin-top:8px">${btn('Escolher '+p.n,`G.escolher('${k}')`,false)}</div>`)});
+ h+=`<h3>🏛️ Mural dos lendários</h3><div class="mu">Pontos de lenda: <b>${meta.pl}</b> · rodadas jogadas: ${meta.rounds}${meta.best?' · melhor posição: '+meta.best+'º':''}<br>Cada rodada rende pontos de acordo com a sua posição. Eles compram melhorias pequenas e permanentes.</div>`;
+ h+=vUps();
+ return h+'</div>';
+}
+
+function vBloq(nome){
+ return `<h3>${nome}</h3><div class="jail"><h2>🚔 Preso</h2><p>Aqui você não entra enquanto estiver na cadeia. Veja a aba Roubar para tentar sair.</p></div>`;
+}
+function vEsc(nome){
+ if(state.hide.hosp){const hh=state.hide,rest=Math.max(0,hh.end-state.t);return `<h3>${nome}</h3>`+card(`🏥 <b>Internado no hospital</b><br><span class="mu">Você passou mal de tanta ressaca. Alta em ${mins(rest)}. Conta: ${fmt(hh.fee)}.</span><div class="mu" style="margin-top:6px">🍺 Ressaca ${Math.floor(state.ress)}</div><div class="meter"><i style="width:${Math.min(100,Math.round(state.ress))}%"></i></div><div class="mu">Roubo, loja, negócios e noite ficam parados até a alta.</div>`)}
+ const hd=state.hide,rest=Math.max(0,hd.end-state.t),proj=Math.max(0,state.heat-hd.drop*rest/hd.dur-3*rest/HOUR),ja=Math.max(0,Math.floor(hd.h0-state.heat)),now=Math.floor(state.heat);
+ return `<h3>${nome}</h3>`+card(`${hd.ic} <b>${hd.nome}</b><br><span class="mu">Faltam ${mins(rest)}. Roubo, loja, negócios e noite ficam parados.</span><div class="mu" style="margin-top:6px">⏱️ Tempo</div><div class="meter"><i style="width:${Math.min(100,Math.round((state.t-hd.start)/hd.dur*100))}%"></i></div><div class="mu" style="margin-top:6px">🔥 Calor ${now} (era ${Math.floor(hd.h0)}, já baixou ${ja})</div><div class="heat"><i style="width:${Math.min(100,state.heat)}%"></i></div><div class="mu">Se esperar até o fim: calor ${Math.floor(proj)}. Se sair agora: fica em ${now}.</div><br>${btn('Sair agora (calor '+now+')','G.sairEsc()',false,'alt')}`);
+}
+function vBaileBloq(nome){
+ return `<h3>${nome}</h3>`+card(`🎉 <b>Você está no baile.</b><br><span class="mu">Roubo, loja e negócios ficam parados enquanto você estiver aqui. Faltam ${mins(state.baileEnd-state.t)} de baile.</span><br><br>${btn('Sair do baile','G.sair()',false,'alt')}`);
+}
+function vLast(){
+ const l=state.last;if(!l)return '';const r=ROUBOS[l.r];
+ return l.ok
+  ?card(`<b>${r.e} ${r.n}: deu certo</b><div class="big"><span>💵 +${fmt(l.g)}</span><span>⭐ +${rpTxt(l.rp)}</span><span>🔥 +${l.h.toFixed(1).replace('.0','')}</span><span>${ATK[l.ak].slice(0,2)} +${l.gx}${l.up?' ⬆':''}</span></div><div class="mu">${wtxt(l,1)}${l.txt}${l.up?` <b>${ATK[l.ak]} subiu para ${state.a[l.ak]}!</b>`:''}${l.mult<1?' Você já está forte demais para isso, então ganhou menos.':''}</div>`,'win')
+  :card(`<b>${r.e} ${r.n}: deu ruim</b><div class="big"><span>🚔 ${mins(l.len)} de cadeia</span><span>💵 −${fmt(l.lost)}</span></div><div class="mu">${wtxt(l,0)}${l.txt}</div>`,'lose');
+}
+function vJail(){
+ const j=jailInfo();
+ return `<div class="jail"><h2>🚔 Preso</h2><p>Por causa de: <b>${state.jailWhy||j.r.e+' '+j.r.n}</b>. Faltam <b>${mins(j.rem)}</b>.</p><p class="mu">Dá para mexer no banco e olhar seu perfil. A força sobe sozinha na cela. O resto está trancado.</p></div>
+ ${state.last&&!state.last.ok?vLast():''}
+ ${card(`<b>☕ Cafezinho para o guarda</b><div class="mu">${fmt(j.sub)} · ${Math.round(j.ch*100)}% de chance. Se ele não aceitar, você perde o dinheiro e fica mais 15 minutos. O preço cai conforme a pena passa.</div><div style="margin-top:8px">${btn('Oferecer o cafezinho','G.subornar()',state.cash<j.sub,'pk')}</div>`)}
+ ${card(`<b>💰 Pagar a fiança</b><div class="mu">${fmt(j.fia)} · garantido. Sai na hora.</div><div style="margin-top:8px">${btn('Pagar fiança','G.fianca()',state.cash<j.fia)}</div>`)}
+ ${card(`<b>🏋️ Academia da cadeia</b><div class="mu">Sua força sobe sozinha enquanto você está preso. Força ${state.a.f}, próximo ponto: ${Math.floor((state.ax&&state.ax.f)||0)}/${need(state.a.f)}.</div>`)}`;
+}
+
+function vRoubar(){
+ if(inJail())return vJail();
+ if(isHid())return vEsc('🦹 Roubos');
+ if(state.inBaile)return vBaileBloq('🦹 Roubos');
+ let h='<h3>🦹 Roubos</h3>';
+ h+=`<div class="mu" style="margin-bottom:8px">${metaLine()}</div>`;
+ h+=`<div class="mu" style="margin-bottom:8px">${ATR.map(a=>a[2]+' '+state.a[a[0]]).join(' · ')} · sobem com o uso</div>`;
+ h+=vLast();
+ if(state.heat>=5&&state.heat<20)h+='<div class="mu" style="margin-bottom:8px">👀 Alguém notou você, mas ainda não é nada sério.</div>';
+ if(state.heat>=20){
+  const b=band(),bi=bandI(),rew=Math.round((state.heat*60+resp()*4)/50)*50,left=1+meta.up.pol-(state.primo||0);
+  h+=`<div class="cartaz"><div class="cz-t">PROCURADO</div><div class="cz-f">${PROF[state.p].e}</div><div class="cz-n">${apelido()}</div><div class="cz-r">Recompensa: ${fmt(rew)}</div><div class="cz-s">${FASEIC[bi]} ${FASEN[bi]}</div></div>`;
+  h+=card(`<b>🔥 Calor ${Math.floor(state.heat)}/100</b><div class="heat"><i style="width:${Math.min(100,state.heat)}%"></i></div><div class="mu">${HINT[b[4]]}<br>Esfria sozinho em ${Math.ceil(state.heat/3)}h do jogo.${HG[bi]>1?' Em compensação, os roubos pagam '+Math.round((HG[bi]-1)*100)+'% a mais.':''}</div><b style="display:block;margin:10px 0 2px">Como baixar o calor</b>`
+   +`<div style="margin-top:8px">${row('🏠','Esconder-se em casa','Você espera 45 minutos sem fazer nada. Baixa 25 de calor.',btn('Esconder',"G.sumir('casa')",state.heat<5))}</div>`
+   +`<div style="margin-top:8px">${row('🏘️','Mudar de bairro','15 minutos de viagem. Baixa 35 de calor, mas perde metade da sua prática.',btn('Mudar',"G.sumir('bairro')",state.heat<5))}</div>`
+   +`<div style="margin-top:8px">${row('🚔','Primo na polícia','Baixa 30 de calor de graça. Usos nesta rodada: '+Math.max(0,left)+'.',btn('Ligar',"G.sumir('primo')",state.heat<5||left<=0))}</div>`
+   +`<div style="margin-top:8px">${row('💵','Pagar o agrado','Baixa 25 de calor.',btn(fmt(despCost()),'G.despistar()',state.cash<despCost()||state.heat<5,'alt'))}</div>`);
+ }
+ const r0=resp();let shownLock=0,hid=0;
+ const gmul=HG[bandI()]*ES().gain,retOf=r=>(r.g[0]+r.g[1])/2*rewardMult(r)*gmul*chanceOf(r)/r.st;
+ let best=-1,bestV=0;ROUBOS.forEach((r,i)=>{if(r.lv<=r0&&armaOk(r)){const v=retOf(r);if(v>bestV){bestV=v;best=i}}});
+ ROUBOS.forEach((r,i)=>{
+  if(r.lv<=r0){
+   const my=Math.floor(pwOf(r)),ch=chanceOf(r),m=rewardMult(r),pc=Math.round(ch*100),cl=pc>=75?'g':pc>=40?'y':'r';
+   const jp=jailPrev(r),pr=Math.round(bonusPr(i)*100),rb=Math.round(bonusResp()*100),hb=Math.round(band()[2]*100);
+   const mo=Math.round((state.t<(state.moralUntil||0)?(state.moral||0):0)*100),es=Math.round(ES().ch*100);
+   const bon=[pr?`prática +${pr}`:'',rb?`respeito +${rb}`:'',mo?`moral do baile +${mo}`:'',es?`arma +${es}`:'',hb?`calor −${hb}`:''].filter(Boolean).join(' · ');
+
+   const ak=MAIN[r.tp],av=state.a[ak]*4,aw=ARMAS[state.arma][r.tp=='v'?3:4],pv=PROT[state.prot][3],okA=armaOk(r),ar0=ARMAS[state.arma],rv=retOf(r);
+   const lab=pc>=75?'Fácil':pc>=40?'Arriscado':'Perigoso',pf=Math.min(100,Math.round(my/Math.max(r.pw,1)*100)),op=openCards[i];
+   const fb=state.last&&state.last.r==i?(state.last.ok?`<div class="bon">✅ Deu certo: +${fmt(state.last.g)} · +${rpTxt(state.last.rp)} respeito</div>`:`<div class="def">🚔 Deu ruim: ${mins(state.last.len)} de cadeia</div>`):'';
+   const det=op?`<div class="mu">${r.pw?`Pede poder ${r.pw}`:'Sem poder mínimo'} · você tem ${my}: ${ATK[ak]} ${state.a[ak]}×4 = ${av} + ${ar0[1]} ${aw} + proteção ${pv}${bon?' · Bônus: '+bon:''}</div><div class="mu">≈ ${fmt(rv)} por ⚡ · dá para ${Math.floor(state.st/r.st)}x · +${r.rp} respeito · ${ATK[ak]} +${xpOf(r)} por sucesso</div>`:'';
+   h+=card(`<div class="row"><div class="ic">${r.e}</div><div class="gr"><b>${r.n}</b><span class="bon"${i==best?'':' style="visibility:hidden"'}> ⭐ melhor retorno</span><br><span class="val">💵 ${fmt(r.g[0]*m*gmul)} a ${fmt(r.g[1]*m*gmul)}${m<1?' ↓':''}</span> <span class="pc ${cl}">${pc}% · ${lab}</span>${HG[bandI()]>1?` <span class="bon">🔥 +${Math.round((HG[bandI()]-1)*100)}%</span>`:''}<div class="meter"><i style="width:${pf}%;background:${pf>=100?'var(--ok)':pf>=60?'var(--gold)':'var(--bad)'}"></i></div><div class="mu">⚡${r.st} · cadeia ${mins(jp.len)} · <span style="text-decoration:underline" onclick="G.det(${i})">${op?'fechar detalhes':'ⓘ detalhes'}</span></div>${okA?'':`<div class="lose">🔒 Precisa de arma da faixa ${FAIXAS[r.fx]} ou melhor. Você usa: ${ar0[1]} ${FAIXAS[ar0[5]]}.</div>`}${fb}${det}</div>${okA?btn(state.st<r.st?`Faltam ⚡${Math.ceil(r.st-state.st)}`:`Roubar ⚡${r.st}`,`G.roubar(${i})`,state.st<r.st):btn('Sem arma',`G.roubar(${i})`,true)}</div>`);
+  }else if(shownLock<2){
+   shownLock++;
+   h+=card(row('🔒',r.n,`${TN[r.tp]} · libera com ${r.lv} de respeito (faltam ${r.lv-r0})`,''),'lock');
+  }else hid++;
+ });
+ if(hid>0)h+=`<div class="mu">🔒 Mais ${hid} roubos mais pesados aparecem quando você ganhar respeito.</div>`;
+ return h;
+}
+
+function vEvento(){
+ const e=state.inBaile?state.ev:state.rev;if(!e)return '';
+ const X=EVX[e.k];
+ if(X){const c=X.c();return card(`<b>${X.tt}</b><div class="mu">${X.d(c)}</div><div class="row" style="margin-top:8px">${btn(X.y+(c?' '+fmt(c):''),"G.ev('sim')",state.cash<c)}${btn(X.n,"G.ev('nao')",false,'alt')}</div>`,'dica')}
+ if(e.k=='dica'){const c=Math.max(20,Math.round(state.cash*.02));return card(`🕶️ <b>Um conhecido te puxa num canto</b><div class="mu">"Sei de um serviço fácil. Dou a dica por ${fmt(c)}." O próximo roubo ganha +15 pontos de chance.</div><div class="row" style="margin-top:8px">${btn('Pagar '+fmt(c),"G.ev('sim')",state.cash<c)}${btn('Ignorar',"G.ev('nao')",false,'alt')}</div>`,'dica')}
+ if(e.k=='briga')return card(`🥊 <b>Começou uma briga de bar</b><div class="mu">Chance de ganhar: ${Math.round(Math.min(.85,Math.max(.15,.4+(state.a.f-5)*.03))*100)}%. Ganhando: +2 Temido e +1 respeito. Perdendo: −15 de estamina e 10% do dinheiro na mão.</div><div class="row" style="margin-top:8px">${btn('Entrar na briga',"G.ev('sim')",false,'pk')}${btn('Sair de fininho',"G.ev('nao')",false,'alt')}</div>`,'dica');
+ return card(`⌚ <b>Um cara oferece um relógio "de ouro"</b><div class="mu">Por R$ 100. Chance de ser de verdade: ${Math.round(Math.min(.85,Math.max(.15,.4+(state.a.i-5)*.03))*100)}%, e aí vale R$ 260.</div><div class="row" style="margin-top:8px">${btn('Comprar por R$ 100',"G.ev('sim')",state.cash<100)}${btn('Dispensar',"G.ev('nao')",false,'alt')}</div>`,'dica');
+}
+const cdTxt=k=>{const r=((state.cd||{})[k]||0)-state.t;return r>0?' · espera '+mins(r):''};
+function interHtml(){
+ const cd=state.cd||{},ok=k=>state.t>=(cd[k]||0)&&!state.ev;
+ const pc=Math.min(.8,Math.max(.25,.45+(state.a.i-5)*.015)),bf=Math.min(.85,Math.max(.25,.5+(state.a.f-5)*.02));
+ return card(row('💃','Dançar','Grátis. +6 de animação e treina carisma.'+cdTxt('d'),btn('Dançar','G.dancar()',!ok('d'))))
+ +card(row('🧰','Ajudar no bar','Bico de 30 minutos. Paga de R$ 20 a R$ 60.'+cdTxt('b'),btn('Bico','G.bico(0)',!ok('b'))))
+ +card(row('👜','Bater carteira',`${Math.round(pc*100)}% de chance. Paga mais, mas se falhar o segurança te tira do baile.`+cdTxt('b'),btn('Tentar','G.bico(1)',!ok('b'),'alt')))
+ +card(row('🥊','Entrar na briga',`⚡ 8 de estamina · ${Math.round(bf*100)}% de vencer. Treina força e dá respeito.`+cdTxt('f'),btn('Brigar','G.brigar()',!ok('f')||state.st<8)));
+}
+function vBaile(){
+ const d=Math.floor(state.t/DAY),n=state.foodDay==d?state.foodN:0,rate=Math.round(20*CASAS[state.casa][3]);
+ let h='';
+ if(!state.inBaile){
+  h+=card(`<b>🪩 ${baileNome()}</b><div class="mu" style="margin:6px 0">⚡ Estamina em dobro lá dentro (+${rate}/h, fora é +${rate/2}/h)<br>🔥 A animação sobe e vira bônus na saída: respeito, carisma e chance no próximo roubo<br>🍻 Bebida forte, paquera e eventos só aqui</div><div class="mu">Custa 1 ingresso (você tem ${Math.floor(state.tk)}) e dura 3 horas. Roubo, loja e negócios param. Na entrada pode ter bandido.</div><br>${btn('Entrar no baile','G.entrar()',state.tk<1)}`);
+  h+=`<h3>🍽️ Lanchonete (${n}/5 hoje)</h3>`;
+  FOOD.forEach((f,i)=>h+=card(row(f[1],f[0],`+${f[3]+foodB()} de estamina`,btn(fmt(f[2]),`G.comer(${i})`,n>=5||state.cash<f[2]||state.st>=maxSt()))));
+  return h;
+ }
+ const t=animT(),cena=CENAS[Math.floor(state.t/(25*60000))%CENAS.length],bg=state.bg||{st:0,mt:0};
+ h+=card(`<h2 style="color:#ff7be5">🪩 ${baileNome()}</h2><div class="mu">Faltam ${mins(state.baileEnd-state.t)} · ${cena}</div><div class="big"><span>⚡ +${rate}/h aqui</span><span>🔥 calor −6/h</span><span>🎶 ${t[1]}</span></div><div class="meter"><i style="width:${Math.min(100,state.anim||0)}%;background:linear-gradient(90deg,#d63bd0,#ffcf3b)"></i></div><div class="mu">Animação ${Math.floor(state.anim||0)}%. Se sair agora: +${Math.floor((state.anim||0)/25)} de respeito, carisma e ${animBon()}.</div><div class="mu">Na noite: ⚡ +${Math.round(bg.st)} · 💘 ${bg.mt} matches</div><br>${btn('Sair do baile','G.sair()',false,'alt')}`,'neon');
+  const pq=Math.min(.8,Math.max(.2,.35+(state.a.c-5)*.02+(state.ress<20?.05:0)));
+ h+=card(row('😏','Paquerar',`R$ 25 · ${Math.round(pq*100)}% de chance (carisma ajuda) · ${state.paq}/3 tentativas`,btn('Paquerar','G.paquerar()',state.paq>=3||state.cash<25||!!state.ev)));
+ h+=dd('b_int','🎭 Interações',interHtml(),1);
+ const tr=1-Math.min(.5,(state.a.t-5)*.02),fg=1-.08*meta.up.fig;
+ h+='<h3>🍻 Bar</h3>';
+ BEB.forEach((b,i)=>h+=card(row(b[1],b[0],`+${b[3]} de estamina · ressaca +${(b[4]*tr*fg).toFixed(1).replace('.0','')}`,btn(fmt(b[2]),`G.beber(${i})`,state.cash<b[2]||state.st>=maxSt()))));
+ h+=`<div class="mu">Com ressaca acima de 50 a bebida rende metade, e em 100 não rende nada. Barato dá estamina rápida e muita ressaca. Caro dá menos ressaca. Tolerância ajuda.</div>`;
+ return h;
+}
+
+const SUIT=['♠','♥','♣','♦'];
+const cardH=(h,hide)=>h.map((r,i)=>{if(hide&&i==1)return '<span class="carta back">?</span>';const s=(r*3+i)%4;return `<span class="carta ${s==1||s==3?'rd':''}">${cn(r)}${SUIT[s]}</span>`}).join('');
+function vCassino(){
+ const b=state.bj,live=b&&!b.over,mi=state.mesa||0,m=MESAS[mi],lock=resp()<m[4],gm='style="color:#cfe8c0"';
+ let h=`<div class="c feltro"><h2 style="color:#e6f5d8">🃏 Blackjack · ${m[0]}</h2><div class="mu" ${gm}>Paga 1 para 1 e 3 para 2 no blackjack. A banca para no 17.</div>`;
+ h+=dd('c_mesas','🪑 Mesa: '+m[0]+' (trocar)',MESAS.map((x,i)=>{const lk=resp()<x[4];return `<div class="mesa ${mi==i?'on':''} ${lk?'lk':''}" onclick="G.mesa(${i})"><b>${lk?'🔒':x[1]} ${x[0]}</b> <span>${fmt(x[2])} ${x[3]?'a '+fmt(x[3]):'ou mais, sem limite'}</span><div>${lk?'libera com '+x[4]+' de respeito':mi==i?'Você está aqui':'Toque para trocar'}</div></div>`}).join(''),0);
+
+ if(b){
+  b.hands.forEach((hd,i)=>{const cur=live&&i==b.cur&&b.hands.length>1;h+=`<div class="hand" ${cur?'style="color:#ffcf3b"':''}>${b.hands.length>1?'Mão '+(i+1):'Você'} (${hv(hd.p)}) · ${fmt(hd.b)}${cur?' ◀':''}</div><div>${cardH(hd.p)}</div>`});
+  h+=`<div class="hand">Banca${live?'':' ('+hv(b.d)+')'}</div><div>${cardH(b.d,live)}</div>`;
+  if(!live)h+=`<div style="margin-top:6px"><b>${b.msg}</b></div>`;
+ }
+ if(live){
+  const hd=b.hands[b.cur],can2=hd.p.length==2,dbl=can2&&state.cash>=hd.b,spl=b.hands.length==1&&can2&&Math.min(10,hd.p[0])==Math.min(10,hd.p[1])&&state.cash>=hd.b;
+  h+=`<div class="row" style="margin-top:6px;flex-wrap:wrap">${btn('Pedir carta','G.bjHit()',false)}${btn('Parar','G.bjStand()',false,'alt')}${btn('Dobrar','G.bjDouble()',!dbl,'pk')}${spl?btn('Dividir','G.bjSplit()',false,'pk'):''}</div>`;
+ }else{
+  const qb=[['min','Mín'],[.25,'¼'],[.5,'½'],['rep','Repetir'],[1,'Tudo'],['max','Máx']].map(q=>'<button class="b sm alt" onclick="G.quick('+JSON.stringify(q[0]).replace(/"/g,"'")+')">'+q[1]+'</button>').join('');
+  h+=`<div class="mu" ${gm} style="margin-top:8px">Valor da aposta:</div><input id="bj" type="number" inputmode="numeric" value="${state.lastBet}"><div class="qk">${qb}</div>${state.sug?btn('Ir para '+MESAS[state.sug.i][0]+' com '+fmt(state.sug.b),'G.irMesa()',false,'pk'):''}${btn('Dar as cartas','G.bjDeal()',lock,'pk')}`;
+ }
+ h+=`<div class="mu" ${gm} style="margin-top:10px">🏆 Maior ganho: ${fmt(state.bjBest||0)} · Lucro no cassino: ${fmt(state.cassLucro||0)}</div></div>`;
+ const sl=state.slot;
+ h+=dd('c_leao','🦁 Leãozinho da Sorte',card(`<div class="mu">Cada giro paga o que sair. Só vale dinheiro do jogo.</div><div class="reels">${sl?sl.r.join(' '):'🦁 🦁 🦁'}</div>${sl?`<div style="text-align:center"><b>${sl.msg}</b></div>`:''}<div class="mu">Valor do giro:</div><input id="sl" type="number" inputmode="numeric" value="${state.lastBet}">${btn('Girar','G.spin()',false,'pk')}`),0);
+ return h;
+}
+function vNoite(){
+ if(inJail())return vBloq('🌙 Noite');
+ if(isHid())return vEsc('🌙 Noite');
+ return `<h3>🌙 Noite</h3>`+subnav('noite',[['cassino','🃏 Cassino'],['baile','🎉 Baile']])+(subs.noite=='baile'?vBaile():vCassino());
+}
+
+function cmpTxt(ai,pi){
+ return ['v','e','s'].map(tp=>{const a=Math.round(pw(tp)),b=Math.round(pwA(tp,ai,pi)),c=b>a?'up':b<a?'dn':'';return `<span class="${c}">${TN[tp].slice(0,2)} ${num(a)}→${num(b)}</span>`}).join(' · ');
+}
+const minLv=f=>Math.min(...ROUBOS.filter(r=>r.fx==f).map(r=>r.lv));
+const fxLock=f=>f>0&&resp()<minLv(f);
+const fxFull=f=>ARMAS.every((x,i)=>x[5]!=f||state.own.includes(i));
+function vArmas(){
+ const fx=subs.faixaSet?(Number(subs.faixa)||0):ARMAS[state.arma][5];
+ let h=`<div class="sub">${FAIXAS.map((f,i)=>`<button class="${fx==i?'on':''}" onclick="G.sub('faixa',${i})">${fxLock(i)?'🔒 ':fxFull(i)?'✔ ':''}${f}</button>`).join('')}</div>`;
+ if(fxLock(fx))return h+card(`🔒 <b>${FAIXAS[fx]}</b><div class="mu">Libera com ${minLv(fx)} de respeito (você tem ${resp()}). ${ESTILO[fx].d}</div>`);
+ h+='<div class="mu">Você guarda o que compra e equipa uma arma por vez. Violento conta nos roubos violentos, blefe conta nos golpes e na lábia. A linha mostra seu poder antes e depois da troca.</div>';
+ h+=card(`<b>${FAIXAS[fx]}</b><div class="mu">${ESTILO[fx].d}${fx>0?'<br>Libera: '+ROUBOS.filter(r=>r.fx==fx).map(r=>r.n).join(', ')+'.':''}</div>`);
+ ARMAS.forEach((x,i)=>{
+  if(x[5]!=fx)return;
+  const own=state.own.includes(i),eq=i==state.arma;
+  h+=card(row(x[1],x[0],`Violento +${x[3]} · Blefe +${x[4]}${eq?' · equipada':''}${PERKS[i]?'<br>★ '+PERKS[i]:''}${eq?'':'<br>'+cmpTxt(i,state.prot)}`,eq?btn('✔ Equipado','',true,'alt'):btn(own?'Equipar':fmt(x[2]),`G.arma(${i})`,!own&&state.cash<x[2]))+(own&&!eq&&i>0?`<div style="margin-top:6px">${btn('Vender por '+fmt(x[2]*.5),'G.vendeArma('+i+')',false,'alt sm')}</div>`:''),eq?'cur':'');
+ });
+ return h;
+}
+function vProt(){
+ let h='<div class="mu">Você guarda o que compra e equipa uma proteção por vez. Ela conta em todos os roubos.</div>',old='';
+ PROT.forEach((x,i)=>{
+  const own=state.ownP.includes(i),eq=i==state.prot;
+  const c=card(row(x[1],x[0],`Poder +${x[3]}${eq?' · equipada':''}${eq?'':'<br>'+cmpTxt(state.arma,i)}`,eq?btn('✔ Equipado','',true,'alt'):btn(own?'Equipar':fmt(x[2]),`G.prot(${i})`,!own&&state.cash<x[2]))+(own&&!eq&&i>0?`<div style="margin-top:6px">${btn('Vender por '+fmt(x[2]*.5),'G.vendeProt('+i+')',false,'alt sm')}</div>`:''),eq?'cur':'');
+  if(own&&i<state.prot)old+=c;else h+=c;
+ });
+ if(old)h+=dd('l_prot','🦺 Proteções anteriores',old,0);
+ return h;
+}
+function vRaros(){
+ const p=advPrice(),have=state.adv||0;
+ return `<div class="mu">Itens raros. Limite de 1 de cada na mochila.</div>`+card(row('⚖️','Advogado de plantão',`Na próxima prisão de 15 minutos ou mais, ele paga a fiança sozinho e te solta na hora. Uso único. O preço acompanha o seu nível.${have?' <b>Você já tem 1.</b>':''}`,have?btn('✔ Na mochila','',true,'alt'):btn(fmt(p),'G.advogado()',state.cash<p)));
+}
+function vLoja(){
+ if(inJail())return vBloq('🛒 Loja');
+ if(isHid())return vEsc('🛒 Loja');
+ if(state.inBaile)return vBaileBloq('🛒 Loja');
+ let h=`<h3>🛒 Loja</h3><div class="mu">💵 ${fmt(state.cash)} · ${['v','e','s'].map(t=>TN[t].slice(0,2)+' '+num(pw(t))).join(' · ')}</div>`+subnav('loja',[['armas','🔪 Armas'],['prot','🦺 Proteção'],['casa','🏠 Casa'],['raros','🕶️ Raros']].concat(state.hs?[['saude','🏥 Farmácia']]:[]));
+ const s=subs.loja;
+ if(s=='armas')h+=vArmas();
+ else if(s=='prot')h+=vProt();
+ else if(s=='raros')h+=vRaros();
+ else if(s=='saude'&&state.hs)h+=vSaude();
+ else if(s=='casa'){h+='<div class="mu">Casa maior recupera estamina mais rápido.</div>';let old='';CASAS.forEach((c,i)=>{const own=i<state.casa,eq=i==state.casa;const cc=card(row(c[1],c[0],`Estamina ×${c[3]}${eq?' · você mora aqui':''}`,i>state.casa?btn(fmt(c[2]),`G.casa(${i})`,state.cash<c[2]):eq?btn('✔ Você mora aqui','',true,'alt'):''),eq?'cur':'');if(own)old+=cc;else h+=cc});if(old)h+=dd('l_casa','🏠 Casas anteriores',old,0)}
+ return h;
+}
+
+function bancoHtml(){
+ return `<h3>🏦 Banco</h3>`+card(`Juros de 2% ao dia até R$ 100.000 guardados. O dinheiro no banco não é levado nos ataques nem na cadeia.<input id="bk" type="number" inputmode="numeric" placeholder="Valor"><div class="row">${btn('Depositar','G.dep(0)',false)}${btn('Depositar tudo','G.dep(1)',false)}${btn('Sacar','G.saca(0)',false,'alt')}${btn('Sacar tudo','G.saca(1)',false,'alt')}</div>`);
+}
+function vNeg(){
+ if(inJail())return `<h3>💼 Negócios</h3><div class="jail"><h2>🚔 Preso</h2><p>Compras e coleta estão trancadas. O banco continua aberto.</p></div>`+bancoHtml();
+ if(isHid())return vEsc('💼 Negócios')+bancoHtml();
+ if(state.inBaile)return vBaileBloq('💼 Negócios')+bancoHtml();
+ const n=state.renda.reduce((a,b)=>a+b,0);
+ const pend=pendente(),el0=state.t-state.lastCol,cheio=Math.max(0,2*DAY-el0)/HOUR,rd=RENDA.reduce((a,it,i)=>a+it[3]*state.renda[i],0)*incMult(),ep=state.emp.reduce((a,i)=>a+EMP[i][4]*(state.p=='empresario'?1.3:1),0),ec=state.emp.reduce((a,i)=>a+EMP[i][3],0),ld=state.lar>=0?LAR[state.lar][2]:0;
+ let h=`<h3>💼 Resumo</h3>`+card(`<div class="mu">Para recolher (renda passiva)</div><div class="big"><span class="up">${fmt(pend)}</span></div><div class="mu">${n?`Enche em ${cheio>=1?Math.round(cheio)+' h':'menos de 1 h'} (acumula no máximo 2 dias).${el0<6*HOUR?' ⚠ Recolher agora dobra o risco de perder itens. Espere '+Math.ceil((6*HOUR-el0)/HOUR)+' h.':''}`:'Compre uma renda passiva para começar a acumular.'}</div><div class="row" style="margin-top:8px">${btn('Recolher','G.recolher()',n==0)}${btn('Recolher e guardar','G.recolher(1)',n==0,'alt')}</div><div class="mu" style="margin-top:10px">Por dia: renda passiva <b>+${fmt(rd)}</b> (acumula até recolher) · empresas <b>+${fmt(ep-ec)}</b> (produz ${fmt(ep)}, custa ${fmt(ec)}, cai na mão) · laranja <b>+${fmt(ld)}</b> (cai na mão)</div>`);
+ let s1='';RENDA.forEach((it,i)=>s1+=card(row(it[1],`${it[0]} ×${state.renda[i]}`,`${fmt(it[3]*incMult())}/dia · risco ${Math.round(it[4]*riskMult()*100)}%`,btn(fmt(it[2]),`G.compraRenda(${i})`,n>=slotsRenda()||state.cash<it[2]))+(state.renda[i]>0?`<div style="margin-top:6px">${btn('Vender 1 por '+fmt(refRenda(i)),'G.vendeRenda('+i+')',false,'alt sm')}</div>`:'')));
+ h+=dd('n_renda',`📈 Renda passiva · ${n}/${slotsRenda()} · +${fmt(rd)}/dia`,s1,0);
+
+ let s2='';EMP.forEach((e,i)=>s2+=card(row(e[1],e[0],`Custa ${fmt(e[3])} · produz ${fmt(e[4]*(state.p=='empresario'?1.3:1))} por dia`,btn(fmt(e[2]),`G.compraEmp(${i})`,state.emp.length>=slotsEmp()||state.cash<e[2]))));
+ state.emp.forEach((i,ix)=>s2+=`<div class="mu" style="margin:6px 0">✔ Você tem: ${EMP[i][0]} ${btn('Vender por '+fmt(EMP[i][2]*.5),'G.vendeEmp('+ix+')',false,'alt sm')}</div>`);
+ if(state.debt>0)s2+=card(`Dívida: ${fmt(state.debt)} ${btn('Pagar','G.pagarDivida()',state.cash<1)}`);
+ h+=dd('n_emp',`🏭 Empresas · ${state.emp.length}/${slotsEmp()} · +${fmt(ep-ec)}/dia${state.debt>0?' · dívida':''}`,s2,state.debt>0);
+ let s3=`<div class="mu">Você empresta o nome para um esquema. Paga comissão por dia, mas o calor não esfria e o esquema pode cair a qualquer hora, com cadeia no seu nome.</div>`;
+ if(state.lar>=0){const L=LAR[state.lar],dia=Math.min(3,Math.floor((state.t-state.larStart)/DAY)+1),left=Math.round(state.larAdv*Math.max(0,state.larEnd-state.t)/(3*DAY));s3+=card(row(L[1],L[0]+' (ativo)',`Dia ${dia}/3 · +${fmt(L[2])} por dia · calor +${L[3]}/h · ${Math.round(L[4]*100*(1-.15*Math.min(2,state.larDone||0)))}% de chance de cair por dia<br>Sair antes custa ${fmt(left+L[2])} (adiantamento restante + 1 dia de multa) e tem 50% de chance de denúncia.`,btn('Sair do esquema','G.larSair()',state.cash<left+L[2],'alt'))+`<div class="meter"><i style="width:${Math.round((state.t-state.larStart)/(3*DAY)*100)}%"></i></div>`,'cur')}
+ else LAR.forEach((L,i)=>{s3+=resp()>=L[6]?card(row(L[1],L[0],`Adiantamento de ${fmt(2*L[2])} na hora · +${fmt(L[2])} por dia por 3 dias · calor +${L[3]}/h · ${Math.round(L[4]*100*(1-.15*Math.min(2,state.larDone||0)))}% de chance de cair por dia · pena de ${L[5]} min · bônus de ${fmt(L[2])} ao cumprir`,btn('Assinar',`G.larEntrar(${i})`,false))):card(row('🔒',L[0],`libera com ${L[6]} de respeito`,''),'lock')});
+ h+=dd('n_lar',`🍊 Ser laranja · ${state.lar>=0?LAR[state.lar][0]+' (ativo)':'sem contrato'}`,s3,state.lar>=0);
+ const inf=influencia();
+ let s4=`<div class="mu">Você paga uma mesada por dia. Se atrasar 12 horas, o contato te entrega e você perde o nível. Seus negócios grandes dão influência (+${inf}), que conta como respeito.</div>`;
+ for(let lv=1;lv<POL.length;lv++){const P=POL[lv],ativo=lv<=(state.pol||0),prox=lv==(state.pol||0)+1,ok=resp()+inf>=P[3];
+  s4+=card(row(P[1],`${P[0]}${ativo?' (ativo)':''}`,`${P[4]}<br>Mesada ${fmt(P[2])}/dia · exige ${P[3]} de respeito${ativo||ok?'':' (faltam '+(P[3]-resp()-inf)+')'}`,ativo?(lv==state.pol?btn('Dispensar','G.polSai()',false,'alt'):btn('✔ Ativo','',true,'alt')):prox&&ok?btn('Contratar','G.polSobe()',false):btn('🔒','',true,'alt')),ativo?'cur':(prox&&ok?'':'lock'));
+ }
+ h+=dd('n_pol',`🚔 Contatos na polícia · ${state.pol?POL[state.pol][0]:'nenhum'}`,s4,0);
+ return h+bancoHtml();
+}
+
+const ROUPA=[[0,'Pivete de chinelo','🩴'],[10,'Camiseta de time','👕'],[50,'Jaqueta de rua','🧥'],[200,'Camisa de seda','🧣'],[700,'Terno de chefão','🕴️']];
+const FUNDO=['linear-gradient(#3a5a2a,#1f2f17)','linear-gradient(#5a4630,#2f2418)','linear-gradient(#4a4a5a,#25252f)','linear-gradient(#2f4a6a,#17253a)','linear-gradient(#6a4a8a,#2a1a3a)'];
+function vBoneco(){
+ const r=resp(),ro=ROUPA.filter(x=>r>=x[0]).pop(),ar=ARMAS[state.arma],pr=PROT[state.prot],ca=CASAS[state.casa];
+ return `<div class="stage" style="background:${FUNDO[state.casa]||FUNDO[0]}"><span class="tg">${ro[1]}</span><span class="cs">${ca[1]}</span><div class="it">${pr[1]}</div><div style="text-align:center"><div class="bd">${PROF[state.p].e}</div><div class="lb">${ro[2]}</div></div><div class="it">${ar[1]}</div></div>`;
+}
+function vPerfil(){
+ state.vp=1;
+ const T=tier(state.tm),M=tier(state.ml),p=PROF[state.p],ar=ARMAS[state.arma];
+ const titulo=T==0&&M==0?'Ainda ninguém sabe seu nome':(T>=M?TT[T]:MT[M]);
+ let h=card(`<div class="row"><div class="pt">${p.e}</div><div class="gr"><b style="font-size:18px">${p.n}</b><div class="mu">Conhecido como: <b>${titulo}</b></div><div class="mu">😈 Temido ${state.tm}${T?' · '+TT[T]:''}<br>🎭 Malandro ${state.ml}${M?' · '+MT[M]:''}</div></div></div>`);
+ h+=vBoneco();
+ h+=card(prestHtml());
+ h+=card(`<div class="row"><div class="ic" style="font-size:52px;width:64px">${ar[1]}</div><div class="gr"><b>Na mão: ${ar[0]}</b><div class="mu">${FAIXAS[ar[5]]} · Violento +${ar[3]} · Blefe +${ar[4]}<br>${ESTILO[ar[5]].d}${PERKS[state.arma]?'<br>★ '+PERKS[state.arma]:''}</div></div></div>`);
+ let sa='<div class="mu">Os atributos sobem com o uso. Cada tipo de roubo treina o seu.</div>';
+ ATR.forEach(a=>{const k=a[0],v=state.a[k],xp=(state.ax&&state.ax[k])||0,nd=need(v);sa+=card(row(a[2],`${a[1]}: ${v}`,`${openCards['a'+k]?a[3]+'<br>':''}<b>Agora:</b> ${attrNow(k)} <span style="text-decoration:underline" onclick="G.det('a${k}')">ⓘ</span>`)+`<div class="meter"><i style="width:${Math.min(100,Math.round(xp/nd*100))}%"></i></div><div class="mu">Próximo ponto: ${Math.floor(xp)}/${nd}</div>`)});
+ h+=dd('p_atr',`🧬 Atributos · 💪${state.a.f} 🧠${state.a.i} 😏${state.a.c} 🍺${state.a.t}`,sa,0);
+ h+=dd('p_poder','⚔️ Poder por tipo de roubo',card(`💪 Violento: <b>${num(pw('v'))}</b><br>🧠 Golpe esperto: <b>${num(pw('e'))}</b><br>😏 Lábia: <b>${num(pw('s'))}</b><div class="mu">Atributo do tipo ×4, mais a arma (violento ou blefe) e a proteção equipadas.</div>`),0);
+ h+=`<h3>Como você está</h3>`+card(`⚡ Estamina máxima: ${maxSt()}<br>🍺 Ressaca ${Math.floor(state.ress)}${state.ress>=1?': estamina máxima −'+Math.round(state.ress*.3)+(state.ress>=50?', bebida rende metade':''):''}<br>🔥 Calor: ${band()[1]} (${Math.floor(state.heat)})<br>${T?`😈 Temido: pena +${T*10}%, ataques no baile menos prováveis, mais calor por roubo.<br>`:''}${M?`🎭 Malandro: cafezinho mais barato e mais fácil, menos calor por roubo.<br>`:''}${ar[1]} ${ar[0]} (violento +${ar[3]}, blefe +${ar[4]}) · 🦺 ${PROT[state.prot][0]} · 🏠 ${CASAS[state.casa][0]}`);
+ const ups=UPS.filter(u=>meta.up[u[0]]>0);
+ if(ups.length)h+=`<h3>Bônus de lenda</h3>`+card(ups.map(u=>`${u[1]} ${u[2]} ${meta.up[u[0]]}`).join('<br>'));
+ return h;
+}
+function vRank(){
+ let h='<h3>🏆 Ranking de respeito</h3>';
+ rankList().forEach((x,i)=>h+=`<div class="c ${x.me?'me':''}"><div class="row"><div class="ic">${i+1}º</div><div class="gr"><b>${x.n}</b></div><b>⭐ ${num(x.r)}</b></div></div>`);
+ h+='<div class="mu">Respeito vem dos roubos, mais 1 ponto a cada R$ 10.000 de patrimônio (dinheiro + banco).</div>';
+ h+=`<h3>⏩ Velocidade de teste</h3>`+card(`Acelera o tempo do jogo. A rodada de 7 dias dura:<br><span class="mu">×1: 7 dias · ×10: 17 horas · ×60: 2,8 horas · ×300: 34 minutos</span><br><br><div class="sp">${[1,10,60,300].map(v=>btn('×'+v,`G.vel(${v})`,state.speed==v,state.speed==v?'pk':'alt')).join('')}</div>`);
+ h+=`<h3>📜 Últimas ações</h3>`+card(state.log.length?state.log.join('<br>'):'<span class="mu">Nada ainda.</span>');
+ h+=`<div style="margin:16px 0">${btn('Recomeçar do zero','G.reset()',false,'pk')}</div>`;
+ return h;
+}
+function vMochila(){
+ let h='<h3>🎒 Mochila</h3><div class="mu">Tudo o que você já comprou. Toque para equipar.</div><h3>Armas</h3>';
+ state.own.forEach(i=>{const x=ARMAS[i],eq=i==state.arma;h+=card(row(x[1],x[0],`Violento +${x[3]} · Blefe +${x[4]}${eq?' · equipada':''}${PERKS[i]?'<br>★ '+PERKS[i]:''}`,eq?btn('✔ Equipado','',true,'alt'):btn('Equipar',`G.arma(${i})`,false)),eq?'cur':'')});
+ h+='<h3>Proteções</h3>';
+ state.ownP.forEach(i=>{const x=PROT[i],eq=i==state.prot;h+=card(row(x[1],x[0],`Poder +${x[3]}${eq?' · equipada':''}`,eq?btn('✔ Equipado','',true,'alt'):btn('Equipar',`G.prot(${i})`,false)),eq?'cur':'')});
+ return h;
+}
+// ---- metas, prestígio e saúde
+const PREST=[[0,'Pivete'],[1,'Aprendiz do crime'],[3,'Malandro de verdade'],[5,'Chefão de bairro'],[7,'Lenda da cidade']];
+const prestTitulo=()=>{const e=meta.est||0;let t=PREST[0][1];PREST.forEach(x=>{if(e>=x[0])t=x[1]});return t};
+const wealth=()=>state.cash+state.bank;
+// id, grupo, nome, emoji, faixa (0 bronze, 1 prata, 2 ouro), alvo, atual, [dinheiro, respeito, lenda, advogado], longa (fica gravada e dá estrela)
+const METAS=[
+['d1','din','Junte R$ 10.000','💵',0,1e4,wealth,[500,1,0,0],0],
+['d2','din','Junte R$ 100.000','💵',1,1e5,wealth,[5000,3,0,0],0],
+['d3','din','Junte R$ 1.000.000','💰',1,1e6,wealth,[30000,8,1,0],0],
+['d4','din','Junte R$ 10.000.000','💰',2,1e7,wealth,[250000,15,2,0],0],
+['d5','din','Chegue a R$ 100.000.000','🏆',2,1e8,()=>Math.max(meta.mx||0,wealth()),[0,0,5,0],1],
+['c1','col','Tenha 5 armas','🔪',0,5,()=>(state.ever||[]).length,[400,1,0,0],0],
+['c2','col','Tenha 12 armas','🔪',1,12,()=>(state.ever||[]).length,[6000,4,0,0],0],
+['c6','col','Complete a faixa Dia a dia','🪵',0,ARMAS.filter(x=>x[5]==0).length,()=>(state.ever||[]).filter(i=>ARMAS[i][5]==0).length,[800,2,0,0],0],
+['c7','col','Complete a faixa Brancas','🔪',1,ARMAS.filter(x=>x[5]==1).length,()=>(state.ever||[]).filter(i=>ARMAS[i][5]==1).length,[12000,5,0,0],0],
+['c3','col','Tenha todas as armas do jogo','🗡️',2,ARMAS.length,()=>meta.col.a.length,[0,0,4,1],1],
+['c4','col','Tenha todas as proteções','🦺',2,PROT.length,()=>meta.col.p.length,[0,0,3,0],1],
+['c5','col','Tenha todas as casas','🏠',2,CASAS.length,()=>meta.col.h.length,[0,0,3,0],1],
+['r1','car','Faça 25 roubos','🦹',0,25,()=>state.nrob,[300,1,0,0],0],
+['r2','car','Faça 100 roubos','🦹',1,100,()=>state.nrob,[4000,4,0,0],0],
+['r3','car','Faça 8 tipos de roubo diferentes','🎯',1,8,()=>Object.keys(state.did||{}).length,[8000,5,0,0],0],
+['r4','car','Complete todos os tipos de roubo','🏅',2,ROUBOS.length,()=>meta.did.length,[0,0,4,0],1],
+['r5','car','Cumpra 3 contratos de laranja','🍊',1,3,()=>state.larDone||0,[10000,5,0,0],0],
+['r6','car','Contrate o delegado','🕴️',1,3,()=>state.pol||0,[0,6,0,0],0],
+['r7','car','Contrate o comandante','⭐',2,4,()=>Math.max(meta.polMax||0,state.pol||0),[0,0,3,0],1],
+['k1','ris','Fique 2 dias sem ser preso','🕊️',0,2,()=>Math.min(2,Math.floor((state.t-(state.lastArrest||0))/DAY)),[500,1,0,0],0],
+['k2','ris','Fique 5 dias sem ser preso','🕊️',1,5,()=>Math.min(5,Math.floor((state.t-(state.lastArrest||0))/DAY)),[6000,4,0,0],0],
+['k3','ris','Ganhe R$ 100.000 em uma mão de blackjack','🃏',1,1e5,()=>state.bjBest||0,[10000,4,0,0],0],
+['k4','ris','Ganhe R$ 1.000.000 em uma mão de blackjack','🃏',2,1e6,()=>Math.max(meta.bj||0,state.bjBest||0),[0,0,3,0],1],
+['k5','ris','Chegue ao 1º lugar do ranking','🥇',2,1,()=>rankList().findIndex(x=>x.me)==0?1:0,[0,0,2,1],0]
+];
+const FM=['🥉 Bronze','🥈 Prata','🥇 Ouro'];
+const premT=p=>[p[0]?'+'+fmt(p[0]):'',p[1]?'+'+p[1]+' de respeito':'',p[2]?'+'+p[2]+' pontos de lenda':'',p[3]?'1 advogado de plantão':''].filter(Boolean).join(' · ');
+const mval=m=>(m[8]?meta.md:state.md)[m[0]]||0;
+const metaDone=m=>mval(m)==2;
+const metaReady=m=>mval(m)==1;
+const nReady=()=>(state&&meta&&state.md)?METAS.filter(metaReady).length:0;
+function payMeta(m){
+ const p=m[7];state.cash+=p[0];state.rep+=p[1];rsAdd('met',p[1]);meta.pl+=p[2];if(p[3])state.adv=Math.max(state.adv||0,1);
+ (m[8]?meta.md:state.md)[m[0]]=2;if(m[8])meta.est=(meta.est||0)+1;
+}
+function pop(t){try{const d=document.createElement('div');d.className='pop';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1500)}catch(e){}}
+function chkMetas(){
+ if(!state||!meta)return;
+ let ch=false;const c=meta.col,un=(a,v)=>{if(!a.includes(v)){a.push(v);ch=true}};
+ state.ever=state.ever||[];state.own.forEach(i=>{un(c.a,i);un(state.ever,i)});state.ownP.forEach(i=>un(c.p,i));for(let i=0;i<=state.casa;i++)un(c.h,i);
+ Object.keys(state.did||{}).forEach(k=>un(meta.did,+k));
+ const w=wealth();if(w>(meta.mx||0)){meta.mx=w;ch=true}
+ if((state.bjBest||0)>(meta.bj||0)){meta.bj=state.bjBest;ch=true}
+ if((state.pol||0)>(meta.polMax||0)){meta.polMax=state.pol;ch=true}
+ state.md=state.md||{};
+ for(const m of METAS){
+  if(mval(m)||m[6]()<m[5])continue;
+  (m[8]?meta.md:state.md)[m[0]]=1;ch=true;
+  say(`🎁 Meta pronta: ${m[2]}. Vá em Eu, Metas para resgatar.`);
+ }
+ if(ch)saveMeta();
+}
+G.metaResg=A(id=>{
+ const m=METAS.find(x=>x[0]==id);if(!m||!metaReady(m))return;
+ const p=m[7];payMeta(m);saveMeta();
+ pop(p[0]?'+'+fmt(p[0]):p[2]?'+'+p[2]+' lenda':'+'+p[1]+' respeito');
+ say(`🎁 Resgatou: ${m[2]}. ${premT(p)}${m[8]?' · ⭐ +1 estrela de prestígio':''}`);
+});
+G.metaTudo=A(()=>{
+ let n=0;const t=[0,0,0,0];
+ METAS.filter(metaReady).forEach(m=>{payMeta(m);n++;m[7].forEach((v,k)=>t[k]+=v)});
+ if(!n)return;saveMeta();pop(t[0]?'+'+fmt(t[0]):'🎁');
+ say(`🎁 Resgatou ${n} metas. ${premT(t)}`);
+});
+function proxMetas(){
+ const n=nReady();
+ if(n)return `<div class="mis" onclick="G.irMetas()">🎁 ${n} meta${n>1?'s':''} para resgatar</div>`;
+ const l=METAS.filter(m=>!mval(m)).map(m=>[m,Math.min(1,m[6]()/m[5])]).sort((a,b)=>b[1]-a[1]).slice(0,1);
+ return l.map(x=>`<div class="mis" onclick="G.irMetas()">🎯 ${x[0][2]} · ${Math.round(x[1]*100)}%</div>`).join('');
+}
+function metaCard(m){
+ const v=mval(m),cur=Math.min(m[5],m[6]()),pc=Math.round(cur/m[5]*100);
+ const sub=`${FM[m[4]]} · ${m[8]?'⭐ gravada':'rodada'}<br>${premT(m[7])}`;
+ if(v==2)return card(row(m[3],m[2],sub,'<span class="up">✔ Feita</span>'),'cur');
+ if(v==1)return card(row(m[3],m[2],sub,btn('Resgatar',`G.metaResg('${m[0]}')`,false,'pk')),'ready');
+ return card(row(m[3],m[2],sub,'')+`<div class="meter"><i style="width:${pc}%"></i></div><div class="mu">${num(Math.floor(cur))} / ${num(m[5])}</div>`);
+}
+function prestHtml(){
+ const e=meta.est||0,f=state.ficha||0;
+ return `🎖️ Prestígio: <b>${prestTitulo()}</b> · ${e} ⭐<div class="mu">Cada estrela dá +R$ 100 no começo da rodada e +1 de estamina máxima.</div><div style="margin-top:8px">📋 Ficha na polícia: <b>${f.toFixed(1).replace('.0','')}</b></div><div class="mu">Cada prisão soma 1. Cada ponto tira 1,5 pontos de chance (máximo 8), aumenta a pena em 6% e cai 1 a cada 2 dias sem ser preso. Contato na polícia e o primo ajudam a baixar.</div>`;
+}
+function vMetas(){
+ state.vm=1;
+ const n=nReady();
+ let h=`<div class="mu">As metas cumpridas ficam prontas até você resgatar. As da rodada são pagas sozinhas quando a rodada acaba. As com estrela ficam gravadas.</div>`+(n?`<div style="margin:8px 0">${btn('🎁 Resgatar tudo ('+n+')','G.metaTudo()',false,'pk')}</div>`:'')+dd('m_prest',`🎖️ Prestígio: ${prestTitulo()} · ${meta.est||0} ⭐ · Ficha ${(state.ficha||0).toFixed(1).replace('.0','')}`,card(prestHtml()),0);
+ const prox=METAS.filter(m=>!mval(m)).map(m=>[m,Math.min(1,m[6]()/m[5])]).sort((x,y)=>y[1]-x[1])[0];
+ [['din','💵 Dinheiro'],['col','🎒 Coleção'],['car','🦹 Carreira'],['ris','🎲 Risco']].forEach(g=>{
+  const l=METAS.filter(m=>m[1]==g[0]).sort((x,y)=>(mval(y)==1)-(mval(x)==1)||(mval(x)==2)-(mval(y)==2)||x[4]-y[4]);
+  const rd=l.filter(metaReady).length;
+  h+=dd('m_'+g[0],`${rd?'🎁 ':''}${g[1]} · ${l.filter(metaDone).length}/${l.length}${rd?' · '+rd+' para resgatar':''}`,l.map(metaCard).join(''),rd>0||(prox&&prox[0][1]==g[0]&&!n));
+ });
+ return h;
+}
+const REM=[['Água com limão','🍋',.5,20],['Soro e repouso','💧',2,50],['Plantão médico','🩺',5,100]];
+const remPrice=k=>Math.max(15,Math.round(k*(state.lastAvg||30)));
+const hospFee=()=>Math.max(60,Math.round((state.lastAvg||30)*3));
+function passarMal(){
+ meta.cn.hosp++;
+ const fee=Math.min(state.cash,hospFee());
+ state.cash-=fee;if(state.inBaile)endBaile(false);
+ state.hide={h0:state.heat,start:state.t,end:state.t+45*60000,dur:45*60000,drop:0,nome:'Internado no hospital',ic:'🏥',hosp:true,fee};state.hs=1;
+ say(`🏥 Você passou mal e foi parar no hospital. Conta: ${fmt(fee)}.`);
+}
+function vSaude(){
+ return `<div class="mu">Ressaca ${Math.floor(state.ress)}. Acima de 50 a estamina volta mais devagar, acima de 80 a chance dos roubos cai, e em 100 você passa mal e fica 45 minutos no hospital (conta de ${fmt(hospFee())}). Remédio só dá para tomar fora do baile.</div>`
+ +REM.map((r,i)=>{const pr=remPrice(r[2]);return card(row(r[1],r[0],`Tira ${r[3]} de ressaca. O preço acompanha o seu nível.`,btn(fmt(pr),`G.remedio(${i})`,state.cash<pr||state.ress<1||busy())))}).join('');
+}
+function vEu(){
+ const n=nReady();
+ const it=[['perfil','🧍 Perfil'],['mochila','🎒 Mochila'],['metas','🎯 Metas'+(n?' 🎁'+n:'')],['mural','🏅 Mural'],['rank','🏆 Rank']];
+ const k=subs.eu;
+ return subnav('eu',it)+(k=='perfil'?vPerfil():k=='mochila'?vMochila():k=='metas'?vMetas():k=='mural'?vMural():vRank());
+}
+
+const views={roubar:vRoubar,noite:vNoite,loja:vLoja,neg:vNeg,eu:vEu};
+const dicaHtml=()=>state.seen[tab]?'':`<div class="c dica">💡 <b>Dica</b><div class="mu" style="color:var(--tx)">${DICAS[tab]}</div><div style="margin-top:8px">${btn('Entendi',`G.dica('${tab}')`,false)}</div></div>`;
+const evBanner=()=>{if(!state||state.over||(state.cartas&&!state.cartaOk))return '';if(state.inBaile)return state.ev?vEvento():'';return !inJail()&&state.rev?vEvento():''};
+const view=()=>dicaHtml()+views[tab]();
+const TABS=[['roubar','🦹','Roubar',()=>true,''],['noite','🌙','Noite',()=>(state.ever||[]).length>=2||state.nrob>=5,'A Noite libera depois que você comprar uma arma ou fazer 5 roubos.'],['loja','🛒','Loja',()=>state.nrob>=1,'A Loja libera depois do primeiro roubo.'],['neg','💼','Negócios',()=>state.mis>=misLen()||resp()>=10,'Negócios libera com 10 de respeito.'],['eu','🧍','Eu',()=>true,'']];
+
+function vCarta(){
+ return `<div id="body"><h1>Carta da rodada</h1><p class="mu">Escolha 1 das 3. Vale só para esta rodada.</p>${state.cartas.map(id=>{const c=CARTAS.find(x=>x[0]==id);return card(row(c[1],c[2],c[3],btn('Pegar',`G.carta('${id}')`,false)))}).join('')}</div>`;
+}
+function vNova(){
+ const i=state.novaArma,x=ARMAS[i],es=ESTILO[x[5]];
+ return `<div class="fim"><div class="c"><div style="font-size:84px">${x[1]}</div><h1>${x[0]}</h1><p class="mu">${FAIXAS[x[5]]} · Violento +${x[3]} · Blefe +${x[4]}</p><p>${es.d}</p>${PERKS[i]?`<p>★ ${PERKS[i]}</p>`:''}<p class="mu">Seu poder agora: ${['v','e','s'].map(t=>TN[t].slice(0,2)+' '+num(pw(t))).join(' · ')}</p>${btn('Bora','G.fechaNova()',false)}</div></div>`;
+}
+function vFim(){
+ const t=state.pos==1?'Chefão de Chinelo':state.pos<=3?'Capo da Quebrada':state.pos<=6?'Malandro Respeitado':'Zé Ninguém com Ambição';
+ const rs=state.rs||{},pat=wResp(state.cash+state.bank),tot=Math.floor(state.rep),ou=Math.max(0,tot-Math.floor((rs.rob||0)+(rs.bai||0)+(rs.met||0)));
+ const L=rankList(),first=L[0],gap=state.pos>1?first.r-resp()+1:0;
+ const su=Math.round(state.su||0),sw=Math.round(state.sw||0),dias=x=>x>=DAY?(x/DAY).toFixed(1).replace('.',',')+' dias':Math.round(x/HOUR*10)/10+' h';
+ const rw=(a,b)=>`<div class="rs"><span>${a}</span><b>${b}</b></div>`;
+ const pass=(state.pass||[]).slice(-5).map(x=>rw('Dia '+(Math.floor(x.t/DAY)+1)+': subiu para '+x.pos+'º',x.n)).join('');
+ return `<div class="fim"><div class="c"><h1>🏁 Fim da rodada</h1><p style="text-align:center">Você ficou em <b>${state.pos}º</b> lugar com <b>${num(resp())}</b> de respeito e <b>${fmt(state.cash+state.bank)}</b> de patrimônio.</p><p style="text-align:center">Título: <b>${t}</b></p>
+ ${gap?`<p style="text-align:center" class="mu">Faltaram ${num(gap)} de respeito para o 1º (${first.n}).</p>`:''}
+ <h3>⭐ De onde veio o respeito</h3>${rw('Roubos',num(Math.floor(rs.rob||0)))}${rw('Patrimônio',num(pat))}${rw('Baile',num(Math.floor(rs.bai||0)))}${rw('Metas',num(Math.floor(rs.met||0)))}${rw('Outros (eventos, brigas, esquemas)',num(ou))}
+ <h3>⚡ Estamina</h3>${rw('Gasta em roubos e brigas',num(su))}${rw('Desperdiçada (barra cheia)',num(sw))}
+ <h3>⛓️ Prisões</h3>${rw('Vezes preso',state.nj||0)}${rw('Tempo parado',dias(state.tj||0))}
+ <h3>📈 Posições</h3>${rw('Melhor posição',(state.bestPos<99?state.bestPos+'º':'-')+(state.bestPos<99?' (dia '+(Math.floor(state.bestT/DAY)+1)+')':''))}${pass||'<div class="mu">Você não ultrapassou ninguém.</div>'}
+ <p class="mu" style="text-align:center;margin-top:12px">🏛️ +${state.plGain} pontos de lenda (total: ${meta.pl})</p><div style="text-align:center">${btn('Nova rodada','G.nova()',false)}</div></div></div>`;
+}
+
+function render(){
+ const sy=window.scrollY||0;
+ const app=$('app');
+ document.body.className=bodyCls();
+ if(!state){app.innerHTML=scr=='titulo'?vTitulo():vEscolha();return}
+ if(state.cartas&&!state.cartaOk){app.innerHTML=vCarta();return}
+ app.innerHTML=`<div class="hd" id="hd">${vHeader()}</div><div id="body">${view()}</div><div class="nav">${TABS.map(t=>{const ok=t[3]();return `<button class="${tab==t[0]?'on':''}${ok?'':' lk'}" onclick="G.tab('${t[0]}')"><b>${ok?t[1]:'🔒'}</b>${t[2]}${t[0]=='eu'&&nReady()?`<u class="bdg">${nReady()}</u>`:''}</button>`}).join('')}</div><div class="evb" id="evb">${evBanner()}</div>${state.over?vFim():''}${state.novaArma!=null&&!state.over?vNova():''}`;
+ window.scrollTo(0,sy);
+}
+
+// ---- ações
+G.ir=()=>{scr='escolha';render()};
+G.escolher=p=>{meta.upLog=[];upSel={};saveMeta();state=newState(p);state.cartas=CARTAS.map(c=>c[0]).sort(()=>Math.random()-.5).slice(0,3);state.cartaOk=false;tab='roubar';infoK=null;save();render()};
+G.tab=t=>{const T=TABS.find(x=>x[0]==t);if(state&&T&&!T[3]()){say(T[4]);return}tab=t;render();window.scrollTo(0,0)};
+G.sub=(k,v)=>{subs[k]=v;if(k=='faixa')subs.faixaSet=1;render()};
+G.info=k=>{if(k=='ress'&&state.hs){tab='loja';subs.loja='saude';render();window.scrollTo(0,0);return}infoK=infoK==k?null:k;const hd=$('hd');if(hd)hd.innerHTML=vHeader()};
+G.dica=t=>{state.seen[t]=1;save();render()};
+G.nova=()=>{state=null;scr='escolha';save();render()};
+G.reset=()=>{if(confirm('Apagar a rodada e recomeçar? Os pontos de lenda ficam.')){state=null;scr='escolha';save();render()}};
+const upCost=(k,n)=>{let c=0;for(let j=0;j<n;j++)c+=2*(meta.up[k]+j+1);return c};
+const upTot=()=>UPS.reduce((a,u)=>a+upCost(u[0],upSel[u[0]]||0),0);
+let upSel={};
+function vUps(){
+ const tot=upTot(),sobra=meta.pl-tot;let h='';
+ UPS.forEach(u=>{const k=u[0],lv=meta.up[k],q=upSel[k]||0,max=lv+q>=u[4],nxt=2*(lv+q+1);
+  h+=card(row(u[1],`${u[2]} (${lv}${q?' → '+(lv+q):''}/${u[4]})`,u[3],max&&!q?'<span class="mu">no máximo</span>':`<div class="qty"><button ${q?'':'disabled'} onclick="G.upSet('${k}',-1)">−</button><b>${q}</b><button ${max||sobra<nxt?'disabled':''} onclick="G.upSet('${k}',1)">+</button></div>`)+(q?'':`<div class="mu" style="margin-top:4px">Próximo nível: ${nxt} pts</div>`))});
+ const q=Object.keys(upSel).filter(k=>upSel[k]>0);
+ h+=card(`<b>Resumo</b><div class="mu">${q.length?UPS.filter(u=>upSel[u[0]]).map(u=>`${u[1]} ${u[2]} +${upSel[u[0]]}`).join(' · ')+`<br>Custo: <b>${tot}</b> pts · Saldo: ${meta.pl} → <b>${sobra}</b> pts`:`Escolha os níveis com − e +. Saldo: ${meta.pl} pts.`}</div><div style="margin-top:8px">${btn('Confirmar compra',"G.upOk()",!q.length)}</div>`);
+ if((meta.upLog||[]).length)h+=card(`<b>Mudou de ideia?</b><div class="mu">Dá para desfazer as compras feitas antes de começar a próxima rodada: ${meta.upLog.reduce((a,x)=>a+x[1],0)} pts de volta.</div><div style="margin-top:8px">${btn('Refazer escolhas',"G.upUndo()",false,'alt')}</div>`);
+ return h;
+}
+G.upSet=(k,d)=>{const u=UPS.find(x=>x[0]==k);let q=(upSel[k]||0)+d;if(q<0||meta.up[k]+q>u[4])return;const old=upSel[k]||0;upSel[k]=q;if(upTot()>meta.pl)upSel[k]=old;render()};
+G.upOk=()=>{if(upTot()>meta.pl)return;UPS.forEach(u=>{const k=u[0],n=upSel[k]||0;for(let j=0;j<n;j++){const c=2*(meta.up[k]+1);meta.pl-=c;meta.up[k]++;meta.upLog.push([k,c])}});upSel={};saveMeta();render()};
+G.upUndo=()=>{(meta.upLog||[]).forEach(x=>{meta.up[x[0]]--;meta.pl+=x[1]});meta.upLog=[];upSel={};saveMeta();render()};
+G.upg=k=>{const u=UPS.find(x=>x[0]==k),lv=meta.up[k],cost=2*(lv+1);if(lv>=u[4]||meta.pl<cost)return;meta.pl-=cost;meta.up[k]++;saveMeta();render()};
+G.vel=A(v=>{state.speed=v;say('Velocidade ×'+v)});
+G.roubar=A(i=>{
+ const r=ROUBOS[i];
+ if(inJail())return say('Você está preso.');
+ if(state.inBaile)return say('Saia do baile primeiro.');
+ if(isHid())return say('Você está escondido.');
+ if(resp()<r.lv)return say('Respeito insuficiente.');
+ if(!armaOk(r))return say('Precisa de uma arma da faixa '+FAIXAS[r.fx]+' ou melhor.');
+ if(state.st<r.st)return say('Sem estamina.');
+ const ch=chanceOf(r),mult=rewardMult(r);
+ state.st-=r.st;state.su=(state.su||0)+r.st;state.lastAvg=(r.g[0]+r.g[1])/2*mult;state.dica=false;
+ const T=tier(state.tm),M=tier(state.ml),hm=Math.max(.5,1+.1*T-.1*M);
+ if(Math.random()<ch){
+  const ratio=pwOf(r)/Math.max(r.pw,10),cool=ratio>=2?.4:ratio>=1.5?.7:1;
+  const rec=(state.rec=state.rec||{}),arr=(rec[i]||[]).filter(x=>state.t-x<3*HOUR),rm=Math.min(2,1+.08*arr.length);arr.push(state.t);rec[i]=arr;
+  const g=Math.round(ri(r.g[0],r.g[1])*mult*HG[bandI()]*ES().gain),h=Math.max(.3,r.rp*.5)*hm*cool*(state.arma==11?.7:state.arma==27?.8:1)*ES().heat*rm;
+  const rpg=r.rp*(ratio<2?1:ratio<4?.5:.25);state.cash+=g;state.rep+=rpg;rsAdd('rob',rpg);state.nrob++;if(r.tp=='v')state.nv=(state.nv||0)+1;else state.ng=(state.ng||0)+1;state.did=state.did||{};state.did[i]=1;state.pr=state.pr||[];state.pr[i]=(state.pr[i]||0)+1;
+  const ak=MAIN[r.tp],gx=xpOf(r),up=gainXp(ak,gx);
+  if(r.tp=='v')state.tm+=rpg;else state.ml+=rpg;
+  state.heat=Math.min(100,state.heat+h);
+  state.last={ok:1,r:i,g,rp:rpg,h,mult,txt:r.ok,ak,gx,up:up>0,w:state.arma};
+  say(`✅ ${r.n}: +${fmt(g)} · +${rpTxt(rpg)} respeito`);state.rx={t:Date.now(),ok:1};
+ }else{
+  const band0=band(),len=Math.max(5*60000,Math.round(r.pena*60000*band0[3]*(1+.1*T)*penaDesc(r)*penaMult())),lost=state.arma==24?0:Math.floor(state.cash*.2);
+  state.cash-=lost;state.jail=state.t+len;state.jailLen=len;state.nj=(state.nj||0)+1;state.tj=(state.tj||0)+len;meta.cn.pr++;state.jailR=i;state.jailWhy='';state.inBaile=false;state.ficha=Math.min(10,(state.ficha||0)+1);state.lastArrest=state.t;
+  state.heat=Math.min(100,state.heat+3);
+  state.last={ok:0,r:i,len,lost,txt:r.ko,w:state.arma};
+  say(`🚔 ${r.n}: deu ruim. Preso por ${mins(len)}.`);state.rx={t:Date.now(),ok:0};afterJail();
+ }
+});
+G.subornar=A(()=>{
+ if(!inJail())return;
+ const j=jailInfo();if(state.cash<j.sub)return;
+ state.cash-=j.sub;
+ if(Math.random()<j.ch){state.jail=0;state.heat=Math.max(0,state.heat-20);say('☕ O guarda aceitou o cafezinho e olhou para o outro lado.')}
+ else{state.jail+=15*60000;state.jailLen+=15*60000;say('🚔 O guarda guardou o dinheiro e não abriu a cela. +15 min.')}
+});
+G.fianca=A(()=>{
+ if(!inJail())return;
+ const j=jailInfo();if(state.cash<j.fia)return;
+ state.cash-=j.fia;state.jail=0;say('💰 Fiança paga. Você saiu com cara de inocente.');
+});
+G.despistar=A(()=>{
+ const c=despCost();if(state.heat<5||state.cash<c||inJail())return;
+ state.cash-=c;state.heat=Math.max(0,state.heat-25);say('🔥 Você trocou de boné e de esquina. O calor baixou.');
+});
+G.entrar=A(()=>{
+ if(state.tk<1||inJail()||state.inBaile||isHid())return;
+ state.tk-=1;state.inBaile=true;state.baileEnd=state.t+3*HOUR;state.ev=null;state.paq=0;state.baN++;state.anim=0;state.bg={st:0,mt:0};
+ const T=tier(state.tm);
+ if(Math.random()<Math.max(.02,.10-.02*T)){
+  const def=state.a.t+PROT[state.prot][3],red=Math.min(.7,def/(def+400));
+  let p=rnd(.2,.5)*(1-red);if(state.p=='bruta')p*=.5;if(state.p=='empresario')p*=1.5;
+  const lost=Math.floor(state.cash*Math.min(.9,p));state.cash-=lost;
+  say(lost>0?`🔪 Um bandido te atacou na entrada e levou ${fmt(lost)}.`:'🔪 Um bandido te atacou, mas você estava sem dinheiro.');
+ }else say('🎉 Entrou no baile. Você tem 3 horas.');
+});
+G.sair=A(()=>{endBaile(false)});
+G.fechaNova=()=>{if(state){state.novaArma=null;render()}};
+G.sumir=A(k=>{
+ if(busy()||state.heat<5)return;
+ if(k=='casa'){state.hide={h0:state.heat,start:state.t,end:state.t+45*60000,dur:45*60000,drop:25,nome:'Escondido em casa',ic:'🏠'};say('🏠 Você se escondeu em casa por 45 minutos. O calor vai caindo.')}
+ else if(k=='bairro'){state.pr=(state.pr||[]).map(x=>Math.floor((x||0)/2));state.hide={h0:state.heat,start:state.t,end:state.t+15*60000,dur:15*60000,drop:35,nome:'Mudando de bairro',ic:'🏘️'};say('🏘️ Você está mudando de bairro (15 minutos). A prática caiu pela metade.')}
+ else if(k=='primo'){if((state.primo||0)>=1+meta.up.pol)return say('O primo já ajudou o que podia nesta rodada.');state.primo=(state.primo||0)+1;state.heat=Math.max(0,state.heat-30);state.ficha=Math.max(0,(state.ficha||0)-1);say('🚔 O primo deu um jeito. −30 de calor.')}
+});
+G.sairEsc=A(()=>{if(state.hide&&!state.hide.hosp){state.hide=null;say('Você saiu do esconderijo mais cedo.')}});
+G.dd=k=>{OPEN[k]=!(OPEN[k]===undefined?DEF[k]:OPEN[k]);render()};
+G.det=k=>{openCards[k]=!openCards[k];render()};
+G.beber=A(i=>{
+ const b=BEB[i];if(inJail()||!state.inBaile||state.cash<b[2])return;
+ const eff=state.ress<50?1:state.ress<100?.5:0,g=b[3]*eff;
+ const rg=b[4]*1.6*(1-Math.min(.5,(state.a.t-5)*.02))*(1-.08*meta.up.fig);
+ state.cash-=b[2];state.st=Math.min(maxSt(),state.st+g);state.ress=Math.min(100,state.ress+rg);
+ const up=gainXp('t',rg/2);state.anim=Math.min(100,(state.anim||0)+8);if(state.bg)state.bg.st+=g;
+ say(`${b[1]} ${b[0]}: +${Math.round(g)} de estamina, ressaca +${rg.toFixed(1).replace('.0','')}${up?' · +1 Tolerância':''}`);if(state.ress>=100)passarMal();
+});
+G.dancar=A(()=>{
+ state.cd=state.cd||{d:0,b:0,f:0};
+ if(!state.inBaile||state.ev||state.t<(state.cd.d||0))return;
+ state.cd.d=state.t+15*60000;state.nd=(state.nd||0)+1;state.anim=Math.min(100,(state.anim||0)+6);const up=gainXp('c',1);
+ say(pick(['💃 Você dançou até a roda abrir.','🕺 Passinho ensaiado, aplauso garantido.','💃 Ninguém sabia o ritmo, mas todo mundo acompanhou.'])+(up?' +1 de carisma.':''));
+});
+G.bico=A(k=>{
+ state.cd=state.cd||{d:0,b:0,f:0};
+ if(!state.inBaile||state.ev||state.t<(state.cd.b||0))return;
+ const sc=1+Math.min(3,resp()/200);
+ if(k==0){
+  const g=Math.round(ri(20,60)*sc);state.cash+=g;advance(30*60000);state.cd.b=state.t+10*60000;
+  say(`🧰 Você ajudou no bar por 30 minutos e ganhou ${fmt(g)}.`);return;
+ }
+ state.cd.b=state.t+30*60000;
+ const p=Math.min(.8,Math.max(.25,.45+(state.a.i-5)*.015));
+ if(Math.random()<p){const g=Math.round(ri(60,200)*sc);state.cash+=g;gainXp('i',1.5);say(`👜 A carteira era gorda: +${fmt(g)}. Ninguém viu.`)}
+ else if(Math.random()<.65){state.anim=Math.floor((state.anim||0)/2);say('🚪 O segurança te pegou no flagra e te botou para fora.');endBaile(false)}
+ else{state.ev={k:'briga'};say('😠 O dono da carteira percebeu. Vai ter confusão.')}
+});
+G.brigar=A(()=>{
+ state.cd=state.cd||{d:0,b:0,f:0};
+ if(!state.inBaile||state.ev||state.t<(state.cd.f||0)||state.st<8)return;
+ state.st-=8;state.su=(state.su||0)+8;state.cd.f=state.t+20*60000;
+ const bf=Math.min(.85,Math.max(.25,.5+(state.a.f-5)*.02));
+ if(Math.random()<bf){const up=gainXp('f',2.5);state.rep+=1;state.nbw=(state.nbw||0)+1;meta.cn.bw++;state.anim=Math.min(100,(state.anim||0)+8);say('🥊 Você ganhou a briga. +1 de respeito'+(up?' e +1 de força.':'.'))}
+ else{const l=Math.min(state.cash,ri(10,50));state.cash-=l;say('🥊 Você levou a pior'+(l?` e perdeu ${fmt(l)} na correria.`:'.'))}
+});
+G.paquerar=A(()=>{
+ if(!state.inBaile||state.ev||state.paq>=3||state.cash<25)return;
+ state.cash-=25;state.paq++;state.paqT=(state.paqT||0)+1;
+ const p=Math.min(.8,Math.max(.2,.35+(state.a.c-5)*.02+(state.ress<20?.05:0)));
+ if(Math.random()<p){
+  state.st=Math.min(maxSt(),state.st+15);
+  const up=gainXp('c',2);state.anim=Math.min(100,(state.anim||0)+10);if(state.bg)state.bg.mt++;
+  say('😏 Deu match! +15 de estamina'+(up?' e +1 de carisma.':'.'));
+ }else{
+  const q=Math.random();
+  if(q<.5)say('😬 Levou um fora na frente de todo mundo. Pelo menos a bebida era boa.');
+  else if(q<.8){const l=Math.floor(state.cash*rnd(.2,.4));state.cash-=l;say(`🕵️ Era golpe. Sumiu com ${fmt(l)} do seu bolso.`)}
+  else{state.ev={k:'briga'};say('😠 Apareceu um ciumento. Vai ter confusão.')}
+ }
+});
+G.ev=A(c=>{
+ const inb=state.inBaile,e=inb?state.ev:state.rev;
+ if(!e||inJail())return;
+ const clear=()=>{if(inb)state.ev=null;else state.rev=null};
+ const X=EVX[e.k];
+ if(X){
+  const m0=c=='sim'?X.yes:X.no;
+  if(c=='sim'){const cost=X.c();if(state.cash<cost)return say('Sem dinheiro.');state.cash-=cost}
+  if(inb&&c=='sim')state.anim=Math.min(100,(state.anim||0)+5);
+  say(typeof m0=='function'?m0():m0);clear();return;
+ }
+ if(!inb)return;
+ if(e.k=='dica'){
+  if(c=='sim'){const cost=Math.max(20,Math.round(state.cash*.02));if(state.cash<cost)return say('Sem dinheiro.');state.cash-=cost;state.dica=true;say('🕶️ Dica anotada: o próximo roubo ganha +15 pontos de chance.')}
+  else say('Você fingiu que não ouviu.');
+ }else if(e.k=='briga'){
+  if(c=='sim'){
+   const p=Math.min(.85,Math.max(.15,.4+(state.a.f-5)*.03));
+   if(Math.random()<p){state.tm+=2;state.rep+=1;meta.cn.bw++;state.st=Math.max(0,state.st-5);const up=gainXp('f',3);state.anim=Math.min(100,(state.anim||0)+8);say('🥊 Você ganhou a briga. +2 Temido e +1 respeito'+(up?' e +1 Força.':'.'))}
+   else{state.st=Math.max(0,state.st-15);const l=Math.floor(state.cash*.1);state.cash-=l;say(`🥊 Apanhou feio. −15 de estamina e −${fmt(l)}.`)}
+  }else say('Você saiu de fininho. Ninguém viu.');
+ }else{
+  if(c=='sim'){
+   if(state.cash<100)return say('Sem dinheiro.');
+   state.cash-=100;const p=Math.min(.85,Math.max(.15,.4+(state.a.i-5)*.03));
+   if(Math.random()<p){state.cash+=260;const up=gainXp('i',2);say('⌚ Era de ouro mesmo! Vendeu por R$ 260'+(up?' e ganhou +1 Inteligência.':'.'))}else say('⌚ Era de plástico. A tinta saiu no pulso.');
+  }else say('Você dispensou o relógio.');
+ }
+ clear();
+});
+G.comer=A(i=>{
+ const f=FOOD[i],d=Math.floor(state.t/DAY);
+ if(busy())return;
+ if(state.foodDay!=d){state.foodDay=d;state.foodN=0}
+ if(state.foodN>=5||state.cash<f[2])return;
+ const ge=f[3]+foodB();state.foodN++;state.cash-=f[2];state.st=Math.min(maxSt(),state.st+ge);say(`${f[1]} ${f[0]}: +${ge} de estamina`);
+});
+G.curar=A(()=>{
+ if(busy())return;
+ const pts=Math.min(Math.ceil(state.ress),Math.floor(state.cash/20));if(pts<1)return;
+ state.cash-=pts*20;state.ress=Math.max(0,state.ress-pts);say(`🏥 Curou ${pts} pontos de ressaca.`);
+});
+G.arma=A(i=>{
+ const x=ARMAS[i];if(busy())return;
+ if(!state.own.includes(i)){if(state.cash<x[2])return;state.cash-=x[2];state.own.push(i);state.novaArma=i;say(`${x[1]} Comprou e equipou: ${x[0]}`)}
+ else say(`${x[1]} Equipou: ${x[0]}`);
+ state.arma=i;subs.faixaSet=0;
+});
+G.prot=A(i=>{
+ const x=PROT[i];if(busy())return;
+ if(!state.ownP.includes(i)){if(state.cash<x[2])return;state.cash-=x[2];state.ownP.push(i);say(`${x[1]} Comprou e equipou: ${x[0]}`)}
+ else say(`${x[1]} Equipou: ${x[0]}`);
+ state.prot=i;
+});
+G.casa=A(i=>{const x=CASAS[i];if(busy()||i<=state.casa||state.cash<x[2])return;state.cash-=x[2];state.casa=i;say(`${x[1]} Agora você mora em: ${x[0]}`)});
+G.compraRenda=A(i=>{
+ const x=RENDA[i],n=state.renda.reduce((a,b)=>a+b,0);
+ if(busy()||n>=slotsRenda()||state.cash<x[2])return;
+ if(n==0)state.lastCol=state.t;
+ state.cash-=x[2];state.renda[i]++;state.rbN=(state.rbN||0)+1;state.rb=state.rb||[];state.rb[i]=state.t;say(`${x[1]} Comprou: ${x[0]}`);
+});
+G.recolher=A(bk=>{
+ if(busy())return;
+ const el=state.t-state.lastCol,days=Math.min(el,2*DAY)/DAY,fast=el<6*HOUR;
+ let gain=0,lost=0;
+ RENDA.forEach((it,i)=>{
+  const n=state.renda[i];
+  for(let k=0;k<n;k++){
+   const risk=it[4]*riskMult()*(fast?2:1);
+   if(Math.random()<risk){state.renda[i]--;lost++}else gain+=it[3]*days*incMult();
+  }
+ });
+ if(bk===1)state.bank+=gain;else state.cash+=gain;state.lastCol=state.t;state.recN=(state.recN||0)+1;
+ say(`💰 Recolheu ${fmt(gain)}${bk===1?' (guardado no banco)':''}${lost?` e perdeu ${lost} ${lost>1?'itens':'item'}`:''}.`);
+});
+const refRenda=i=>Math.round(RENDA[i][2]*((state.t-((state.rb||[])[i]??-9*DAY))>=DAY?.6:.4));
+G.vendeRenda=A(i=>{
+ if(busy()||state.renda[i]<=0)return;
+ if(pendente()>0)G.recolher();
+ if(state.renda[i]<=0)return;
+ const v=refRenda(i);if(!confirm(`Vender 1 ${RENDA[i][0]} por ${fmt(v)}?`))return;
+ state.renda[i]--;state.cash+=v;say(`${RENDA[i][1]} Vendeu: ${RENDA[i][0]} por ${fmt(v)}`);
+});
+G.vendeEmp=A(ix=>{
+ if(busy()||ix<0||ix>=state.emp.length)return;
+ const e=EMP[state.emp[ix]];let v=Math.round(e[2]*.5);
+ if(!confirm(`Vender ${e[0]} por ${fmt(v)}?`))return;
+ if(state.debt>0){const d=Math.min(state.debt,v);state.debt-=d;v-=d;if(state.debt<1)state.debt=0}
+ state.cash+=v;state.emp.splice(ix,1);say(`${e[1]} Vendeu: ${e[0]}`);
+});
+G.vendeArma=A(i=>{
+ const x=ARMAS[i];if(busy()||!state.own.includes(i)||i==state.arma||i==0)return;
+ const v=Math.floor(x[2]*.5);if(!confirm(`Vender ${x[0]} por ${fmt(v)}?`))return;
+ state.own=state.own.filter(k=>k!=i);state.cash+=v;say(`${x[1]} Vendeu: ${x[0]} por ${fmt(v)}`);
+});
+G.vendeProt=A(i=>{
+ const x=PROT[i];if(busy()||!state.ownP.includes(i)||i==state.prot||i==0)return;
+ const v=Math.floor(x[2]*.5);if(!confirm(`Vender ${x[0]} por ${fmt(v)}?`))return;
+ state.ownP=state.ownP.filter(k=>k!=i);state.cash+=v;say(`${x[1]} Vendeu: ${x[0]} por ${fmt(v)}`);
+});
+G.compraEmp=A(i=>{
+ const x=EMP[i];if(busy()||state.emp.length>=slotsEmp()||state.cash<x[2])return;
+ state.cash-=x[2];state.emp.push(i);say(`${x[1]} Abriu: ${x[0]}`);
+});
+G.pagarDivida=A(()=>{if(busy())return;const p=Math.min(state.cash,state.debt);state.cash-=p;state.debt-=p;if(state.debt<1)state.debt=0;say('Pagou '+fmt(p)+' da dívida.')});
+G.dep=A(all=>{const v=all?Math.floor(state.cash):Math.min(readNum('bk'),Math.floor(state.cash));if(v<=0)return;state.cash-=v;state.bank+=v;state.depN=(state.depN||0)+1;say('🏦 Depositou '+fmt(v))});
+G.saca=A(all=>{const v=all?Math.floor(state.bank):Math.min(readNum('bk'),Math.floor(state.bank));if(v<=0)return;state.bank-=v;state.cash+=v;say('🏦 Sacou '+fmt(v))});
+
+G.carta=id=>{
+ if(!state||state.cartaOk)return;
+ state.lastTs=Date.now();state.cartaOk=true;
+ const S=state;
+ if(id=='her')S.cash+=600;
+ else if(id=='chi'){S.own.push(2);S.arma=2}
+ else if(id=='tk')S.tk+=10;
+ else if(id=='int')S.a.i+=3;
+ else if(id=='for')S.a.f+=3;
+ else if(id=='car')S.a.c+=3;
+ else if(id=='del')S.cpena=.75;
+ else if(id=='sor')S.cch=.05;
+ else if(id=='jaq'){S.ownP.push(1);S.prot=1}
+ chkMis();save();render();
+};
+G.larEntrar=A(i=>{const L=LAR[i];if(busy()||state.lar>=0||resp()<L[6])return;const adv=2*L[2];state.cash+=adv;state.lar=i;state.larStart=state.t;state.larEnd=state.t+3*DAY;state.larAdv=adv;say(`${L[1]} Você assinou e recebeu ${fmt(adv)} de adiantamento. O contrato dura 3 dias.`)});
+G.larSair=A(()=>{
+ if(busy()||state.lar<0)return;const L=LAR[state.lar];
+ const left=Math.round(state.larAdv*Math.max(0,state.larEnd-state.t)/(3*DAY)),tot=left+L[2];
+ if(state.cash<tot)return say('Sem dinheiro para sair: a multa é '+fmt(tot)+'.');
+ state.cash-=tot;state.lar=-1;
+ if(Math.random()<.5){state.heat=Math.min(100,state.heat+20);say('🍊 Você quebrou o contrato e pagou '+fmt(tot)+'. Alguém denunciou: +20 de calor.')}
+ else say('🍊 Você quebrou o contrato e pagou '+fmt(tot)+'. Ninguém falou nada.');
+});
+G.advogado=A(()=>{const p=advPrice();if(busy()||(state.adv||0)>=1||state.cash<p)return;state.cash-=p;state.adv=1;say('⚖️ O advogado ficou de plantão para você.')});
+G.polSobe=A(()=>{const nx=(state.pol||0)+1,P=POL[nx];if(!P||busy()||resp()+influencia()<P[3])return;state.pol=nx;state.polAtraso=0;say(`${P[1]} ${P[0]} contratado. Mesada de ${fmt(P[2])} por dia.`)});
+G.polSai=A(()=>{if(state.pol>0){state.pol--;say('Você dispensou o contato.')}});
+G.remedio=A(i=>{const r=REM[i],p=remPrice(r[2]);if(busy()||state.cash<p||state.ress<1)return;state.cash-=p;state.ress=Math.max(0,state.ress-r[3]);say(`${r[1]} ${r[0]}: ressaca −${r[3]}.`)});
+G.irMetas=()=>{subs.eu='metas';tab='eu';render();window.scrollTo(0,0)};
+G.irMesa=A(()=>{const s0=state.sug;if(!s0)return;state.mesa=s0.i;state.lastBet=s0.b;state.sug=null});
+G.mesa=A(i=>{
+ state.sug=null;
+ if(state.bj&&!state.bj.over)return say('Termine a mão antes de trocar de mesa.');
+ const m=MESAS[i];if(resp()<m[4])return say('Mesa trancada. Libera com '+m[4]+' de respeito.');
+ state.mesa=i;state.lastBet=Math.max(m[2],m[3]?Math.min(state.lastBet,m[3]):state.lastBet);
+});
+G.quick=A(k=>{
+ const m=MESAS[state.mesa||0];
+ let v=k=='min'?m[2]:k=='max'?(m[3]||state.cash):k=='rep'?state.lastBet:Math.floor(state.cash*k);
+ v=Math.min(v,Math.floor(state.cash));v=Math.max(v,m[2]);if(m[3])v=Math.min(v,m[3]);
+ state.lastBet=v;
+});
+
+// blackjack
+const draw=()=>ri(1,13);
+const hv=h=>{let s=0,a=0;h.forEach(r=>{s+=Math.min(10,r);if(r==1)a++});return a&&s+10<=21?s+10:s};
+const cn=r=>r==1?'A':r>10?'JQK'[r-11]:r;
+function bjAdv(){
+ const b=state.bj;
+ while(b.cur<b.hands.length&&(b.hands[b.cur].done||hv(b.hands[b.cur].p)>=21)){b.hands[b.cur].done=true;b.cur++}
+ if(b.cur>=b.hands.length)bjSettle();
+}
+function bjSettle(){
+ const b=state.bj;
+ if(!b.nat&&b.hands.some(h=>hv(h.p)<=21))while(hv(b.d)<17)b.d.push(draw());
+ const d=hv(b.d);let ret=0,bet=0;const ms=[];
+ b.hands.forEach((h,i)=>{
+  const p=hv(h.p),pre=b.hands.length>1?`Mão ${i+1}: `:'';let r=0,m;
+  if(p>21)m=`Você estourou com ${p}. Perdeu ${fmt(h.b)}.`;
+  else if(b.nat){if(d==21){r=h.b;m='Blackjack dos dois. Empate, a mesa devolveu o valor.'}else{r=h.b*2.5;m=`Blackjack! Ganhou ${fmt(h.b*1.5)}.`}}
+  else if(d>21){r=h.b*2;m=`A banca estourou com ${d}. Você fez ${p} e ganhou ${fmt(h.b)}.`}
+  else if(p>d){r=h.b*2;m=`Você fez ${p}, a banca fez ${d}. Ganhou ${fmt(h.b)}.`}
+  else if(p==d){r=h.b;m=`Os dois fizeram ${p}. Empate, a mesa devolveu o valor.`}
+  else m=`Você fez ${p}, a banca fez ${d}. Perdeu ${fmt(h.b)}.`;
+  ret+=r;bet+=h.b;ms.push(pre+m);
+ });
+ b.over=true;b.msg=ms.join('<br>');
+ const net=ret-bet;state.cassLucro=(state.cassLucro||0)+net;
+ if(net>(state.bjBest||0)){state.bjBest=net;b.msg+=' 🏆 Novo recorde de ganho!'}
+ state.cash+=ret;say('🃏 '+ms.join(' '));
+}
+G.bjDeal=A(()=>{
+ if(inJail())return;
+ const b=readNum('bj'),m=MESAS[state.mesa||0];
+ if(resp()<m[4])return say('Mesa trancada.');
+ if(b<=0||b>state.cash)return say('Valor inválido para a mesa.');
+ if(b<m[2])return say('Aposta mínima desta mesa: '+fmt(m[2]));
+ if(m[3]&&b>m[3]){const si=MESAS.findIndex((x,j)=>j>(state.mesa||0)&&resp()>=x[4]&&b>=x[2]&&(!x[3]||b<=x[3]));state.sug=si>=0?{i:si,b}:null;return say(`Esta mesa aceita até ${fmt(m[3])}.`+(si>=0?` Toque em "Ir para ${MESAS[si][0]}" para apostar ${fmt(b)}.`:' Suba de nível para liberar uma mesa maior.'))}
+ state.sug=null;state.lastBet=b;state.cash-=b;
+ state.bj={hands:[{p:[draw(),draw()],b,done:false}],cur:0,d:[draw(),draw()],over:false,msg:'',nat:false,split:false};
+ if(hv(state.bj.hands[0].p)==21){state.bj.nat=true;state.bj.hands[0].done=true;bjAdv()}
+});
+G.bjHit=A(()=>{const b=state.bj,h=b&&!b.over&&b.hands[b.cur];if(!h)return;h.p.push(draw());if(hv(h.p)>=21)h.done=true;bjAdv()});
+G.bjStand=A(()=>{const b=state.bj,h=b&&!b.over&&b.hands[b.cur];if(!h)return;h.done=true;bjAdv()});
+G.bjDouble=A(()=>{
+ const b=state.bj,h=b&&!b.over&&b.hands[b.cur];if(!h||h.p.length!=2||state.cash<h.b)return;
+ state.cash-=h.b;h.b*=2;h.p.push(draw());h.done=true;bjAdv();
+});
+G.bjSplit=A(()=>{
+ const b=state.bj,h=b&&!b.over&&b.hands[b.cur];
+ if(!h||b.hands.length!=1||h.p.length!=2||Math.min(10,h.p[0])!=Math.min(10,h.p[1])||state.cash<h.b)return;
+ state.cash-=h.b;b.split=true;
+ b.hands=[{p:[h.p[0],draw()],b:h.b,done:false},{p:[h.p[1],draw()],b:h.b,done:false}];b.cur=0;bjAdv();
+});
+
+// Leãozinho da Sorte
+G.spin=A(()=>{
+ if(inJail())return;
+ const b=readNum('sl');
+ if(b<=0||b>state.cash)return say('Valor inválido para o giro.');
+ state.lastBet=b;state.cash-=b;state.spins++;
+ let m;
+ if(state.spins<=5)m=Math.random()<.5?2:0;
+ else{const r=Math.random();m=r<.005?50:r<.03?10:r<.11?3:r<.26?1:0}
+ let r;
+ if(m==50)r=['🦁','🦁','🦁'];
+ else if(m==10){const s=pick(['💰','🍒','⭐']);r=[s,s,s]}
+ else if(m==3)r=['🦁','🦁',pick(SYM.filter(x=>x!='🦁'))];
+ else if(m==2||m==1){const s=pick(['🍒','🍋','⭐']);r=[s,s,pick(SYM.filter(x=>x!=s&&x!='🦁'))]}
+ else{do{r=[pick(SYM),pick(SYM),pick(SYM)]}while(r[0]==r[1]&&r[1]==r[2]||r.filter(x=>x=='🦁').length>=2)}
+ const ret=b*m;state.cash+=ret;state.cassLucro=(state.cassLucro||0)+ret-b;
+ const msg=m==0?'O leão comeu o valor do giro.':m==1?'Empatou, só devolveu o valor.':`Pagou ×${m}: +${fmt(ret-b)}`;
+ state.slot={r,msg};say('🦁 '+msg);
+});
+
+const bodyCls=()=>!state||state.over?'':(inJail()?'preso':state.inBaile?'baile':state.heat>=80?'cacado':'')+(evBanner()?' ev':'');
+let touching=0,touchT;
+document.addEventListener('touchstart',()=>{touching=1;clearTimeout(touchT)},{passive:true});
+document.addEventListener('touchend',()=>{clearTimeout(touchT);touchT=setTimeout(()=>{touching=0},700)},{passive:true});
+document.addEventListener('touchcancel',()=>{clearTimeout(touchT);touchT=setTimeout(()=>{touching=0},700)},{passive:true});
+function tick(){
+ if(!state||state.over)return;
+ if(state.cartas&&!state.cartaOk)return;
+ sync();chkMis();chkAch();save();
+ const eb=evBanner(),ebe=$('evb');if(ebe&&ebe.dataset.h!==eb){ebe.dataset.h=eb;ebe.innerHTML=eb}
+ document.body.className=bodyCls();
+ nTick++;
+ if(touching)return;
+ const hd=$('hd');if(hd)hd.innerHTML=vHeader();
+ if(nTick%8==0&&!(document.activeElement&&document.activeElement.tagName=='INPUT')){const b=$('body'),sy=window.scrollY||0;if(b){b.innerHTML=view();window.scrollTo(0,sy)}}
+ if(state.over)render();
+}
+load();
+render();
+setInterval(tick,1000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
+</script>
+</body>
+</html>
